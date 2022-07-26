@@ -8,7 +8,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform[] spawnPos;
 
     private void Start() {
-        
     }
 
     private void Update() {

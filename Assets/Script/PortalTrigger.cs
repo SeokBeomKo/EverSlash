@@ -7,7 +7,7 @@ public class PortalTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player"){
-            SceneManager.LoadScene("04_00.Tutorial");
+            SceneManager.LoadScene(4);
         }
     }
 }

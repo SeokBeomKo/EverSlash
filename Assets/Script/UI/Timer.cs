@@ -7,10 +7,12 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timeText;
 
+    public int allSeconds;
     public int minutes;
     public int seconds;
 
     private void Awake() {
+        allSeconds = 0;
         minutes = 0;
         seconds = 0;
 
@@ -22,6 +24,7 @@ public class Timer : MonoBehaviour
         SetUI();
         yield return new WaitForSeconds(1f);
         seconds++;
+        allSeconds++;
         if (seconds == 60)
         {
             minutes++;

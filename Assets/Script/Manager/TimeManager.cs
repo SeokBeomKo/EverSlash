@@ -12,12 +12,10 @@ public class TimeManager : MonoBehaviour
         if (instance == null) instance = this;
         else if (instance != null) return;
         #endregion
-
-        StartCoroutine(Count());
     }
 
-    IEnumerator Count()
+    public IEnumerator SpawnEnemy(float time, string name, int count)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(time);
     }
 }

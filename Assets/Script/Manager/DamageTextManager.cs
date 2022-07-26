@@ -5,21 +5,13 @@ using UnityEngine.UI;
 
 public class DamageTextManager : MonoBehaviour
 {
-    #region 싱글톤
-    private static DamageTextManager instance = null;
-
-    public static DamageTextManager Instance {
-        get {
-            if(instance == null) {
-                instance = GameObject.FindObjectOfType<DamageTextManager>();
-                if (instance == null) {
-                    Debug.LogError("There's no active DamageTextController Object");
-                }
-            }
-            return instance;
-        }
+    public static DamageTextManager instance;
+    private void Awake() {
+        #region 싱글톤
+        if (instance == null) instance = this;
+        else if (instance != null) return;
+        #endregion
     }
-    #endregion
 
     public Canvas canvas;
     public GameObject dmgTxt;

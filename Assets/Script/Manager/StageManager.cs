@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+
+public class StageManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static StageManager instance;
     private void Awake()
     {
         #region 싱글톤
@@ -13,5 +14,7 @@ public class UIManager : MonoBehaviour
         #endregion
     }
 
-    public HealthBar healthBar;
+    GameObject player;
+
+    Transform[] EnemySpawn;
 }

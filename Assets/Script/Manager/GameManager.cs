@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static GameManager instance;
     private void Awake()
     {
         #region 싱글톤
@@ -12,6 +12,4 @@ public class UIManager : MonoBehaviour
         else if (instance != null) return;
         #endregion
     }
-
-    public HealthBar healthBar;
 }

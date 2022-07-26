@@ -10,8 +10,5 @@ public class Respawn : MonoBehaviour
     private void Start() {
         DataManager.instance.LoadData();
         player = Instantiate(classList[DataManager.instance.nowPlayer.playerClass]);
-
-        StageManager.instance.Player = player;
-        StageManager.instance.GetPlayer();
     }
 }

@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class DamageTextManager : MonoBehaviour
 {
     #region 싱글톤
-    private static DamageTextManager _instance = null;
+    private static DamageTextManager instance = null;
 
     public static DamageTextManager Instance {
         get {
-            if(_instance == null) {
-                _instance = GameObject.FindObjectOfType<DamageTextManager>();
-                if (_instance == null) {
+            if(instance == null) {
+                instance = GameObject.FindObjectOfType<DamageTextManager>();
+                if (instance == null) {
                     Debug.LogError("There's no active DamageTextController Object");
                 }
             }
-            return _instance;
+            return instance;
         }
     }
     #endregion

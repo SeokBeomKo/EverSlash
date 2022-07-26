@@ -5,17 +5,17 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     #region 싱글톤
-    private static UIManager _instance = null;
+    private static UIManager instance = null;
 
     public static UIManager Instance {
         get {
-            if(_instance == null) {
-                _instance = GameObject.FindObjectOfType<UIManager>();
-                if (_instance == null) {
+            if(instance == null) {
+                instance = GameObject.FindObjectOfType<UIManager>();
+                if (instance == null) {
                     Debug.LogError("There's no active UIManager Object");
                 }
             }
-            return _instance;
+            return instance;
         }
     }
     #endregion

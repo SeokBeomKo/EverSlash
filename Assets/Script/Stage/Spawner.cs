@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] Transform target;
+    [SerializeField] Transform[] spawnPos;
+
+    private void Start() {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
+        if (target == null)
+            target = GameManager.instance.player.transform;
         
+        gameObject.transform.position = target.position;
     }
 }

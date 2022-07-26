@@ -12,4 +12,6 @@ public class GameManager : MonoBehaviour
         else if (instance != null) return;
         #endregion
     }
+
+    public GameObject player;
 }

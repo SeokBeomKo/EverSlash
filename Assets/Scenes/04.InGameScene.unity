@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.549361, g: 0.79545885, b: 0.9734807, a: 1}
+  m_IndirectSpecularColor: {r: 0.54914045, g: 0.7960088, b: 0.97293365, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 1412939230}
+  allSeconds: 0
   minutes: 0
   seconds: 0
 --- !u!1 &142164340
@@ -1325,6 +1326,7 @@ MonoBehaviour:
   - {fileID: 347687992}
   - {fileID: 1066557093}
   - {fileID: 549801311}
+  spawnList: {fileID: 0}
 --- !u!1 &685910086
 GameObject:
   m_ObjectHideFlags: 0
@@ -2467,6 +2469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82b5ea82e6b53f4288d9e390cd0b8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
 --- !u!4 &1496105177
 Transform:
   m_ObjectHideFlags: 0
@@ -2899,6 +2902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  isAlive: 0
 --- !u!4 &1736402395
 Transform:
   m_ObjectHideFlags: 0

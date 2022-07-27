@@ -10,31 +10,39 @@ public class Timer : MonoBehaviour
     public int allSeconds;
     public int minutes;
     public int seconds;
+    public bool isDoing;
 
-    private void Awake() {
+    private void Start() {
         allSeconds = 0;
         minutes = 0;
         seconds = 0;
+        isDoing = true;
 
         StartCoroutine(Count());
     }
 
     IEnumerator Count()
     {
-        SetUI();
-        yield return new WaitForSeconds(1f);
-        seconds++;
-        allSeconds++;
-        if (seconds == 60)
+        var wait = new WaitForSeconds(1f);
+        while(isDoing)
         {
-            minutes++;
-            seconds = 0;
+            isDoing = GameManager.instance.isAlive;
+            SynchroTime();
+            yield return wait;
+
+            seconds++;
+            allSeconds++;
+            if (seconds == 60)
+            {
+                minutes++;
+                seconds = 0;
+            }
         }
-        StartCoroutine(Count());
     }
 
-    private void SetUI()
+    private void SynchroTime()
     {
+        TimeManager.instance.Time = allSeconds;
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

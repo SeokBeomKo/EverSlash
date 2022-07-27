@@ -5,6 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public GameObject player;
+    public bool isAlive;
+
     private void Awake()
     {
         #region 싱글톤
@@ -13,5 +17,9 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
-    public GameObject player;
+    private void Start() {
+        isAlive = true;
+    }
+
+    
 }

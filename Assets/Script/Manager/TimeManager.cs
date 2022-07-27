@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance;
+    public UnityAction<int> eventPerSecond;
+
+    private int _time;
+    public int Time{
+        get{return _time;}
+        set
+        {
+            eventPerSecond?.Invoke(_time);
+        }
+    }
+
     private void Awake()
     {
         #region 싱글톤
@@ -14,8 +26,4 @@ public class TimeManager : MonoBehaviour
         #endregion
     }
 
-    public IEnumerator SpawnEnemy(float time, string name, int count)
-    {
-        yield return new WaitForSeconds(time);
-    }
 }

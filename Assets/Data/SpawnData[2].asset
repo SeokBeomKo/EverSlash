@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240eda442cc1bd94fb720e545aac49f8, type: 3}
   m_Name: SpawnData[2]
   m_EditorClassIdentifier: 
-  commonDatas: []
-  eliteDatas: []
-  bossDatas: []
+  commonDatas:
+  - 
+  eliteDatas:
+  - 
+  bossDatas:
+  - 

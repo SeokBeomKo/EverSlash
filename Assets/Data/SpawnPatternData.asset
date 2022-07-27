@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2513a83d1bab64d9d8776718e37b15, type: 3}
   m_Name: SpawnPatternData
   m_EditorClassIdentifier: 
-  spawnPatternData: []
+  commonPatternDatas:
+  - Name: 
+    EA: 0
+    Repeat: 0
+    Delay: 0
+  - Name: 
+    EA: 0
+    Repeat: 0
+    Delay: 0
+  elitePatternDatas: []
+  bossPatternDatas: []

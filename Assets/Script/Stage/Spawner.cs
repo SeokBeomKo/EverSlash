@@ -75,13 +75,13 @@ public class Spawner : MonoBehaviour
         }
         if(eliteSeconds.Contains(time))
         {
-            SpawnEnemy(SpawnManager.instance.EliteSpawn());
+            StartCoroutine(SpawnEnemy(SpawnManager.instance.EliteSpawn()));
 
             eliteSeconds.Remove(time);
         }
         if(bossSeconds.Contains(time))
         {
-            SpawnEnemy(SpawnManager.instance.BossSpawn());
+            StartCoroutine(SpawnEnemy(SpawnManager.instance.BossSpawn()));
 
             bossSeconds.Remove(time);
         }
@@ -90,7 +90,7 @@ public class Spawner : MonoBehaviour
     public IEnumerator SpawnEnemy(PatternData patternData, bool isRepeat = true)
     {
         var wait = new WaitForSeconds(patternData.Delay);
-        Debug.Log("패턴 딜레이" + patternData.Delay);
+
         int repeatCount = patternData.Repeat;
 
         while(isRepeat)
@@ -98,15 +98,16 @@ public class Spawner : MonoBehaviour
             switch(patternData.patternType)
             {
                 case PatternType.common:
-                    Debug.Log("일반 생성");
-                    //int temp = Random.Range(0,spawnList.commonDatas.Length);
-                    //GameObject Enemy = ObjectPooler.SpawnFromPool(spawnList.commonDatas[temp],SetPos());
+                    GameObject commonEnemy = 
+                    ObjectPooler.SpawnFromPool(spawnList.commonDatas[Random.Range(0, spawnList.commonDatas.Length)],SetPos());
                     break;
                 case PatternType.elite:
-                    Debug.Log("엘리트 생성");
+                    GameObject eliteEnemy = 
+                    ObjectPooler.SpawnFromPool(spawnList.eliteDatas[Random.Range(0, spawnList.eliteDatas.Length)], SetPos());
                     break;
                 case PatternType.boss:
-                    Debug.Log("보스 생성");
+                    // GameObject bossEnemy = 
+                    // ObjectPooler.SpawnFromPool(spawnList.bossDatas[Random.Range(0, spawnList.bossDatas.Length)], SetPos());
                     break;
             }
 
@@ -131,13 +132,9 @@ public class Spawner : MonoBehaviour
             for (int i = 0; i < 1;)                             
             {
                 if (temp_i_list.Contains(temp_i))               // 기존에 돌렸던 좌표와 겹치는지 검사
-                {
                     temp_i = Random.Range(0, spawnPos.Length);
-                }
                 else
-                {
                     i++;                                        // 겹치지 않았다면 다음 실행
-                }
             }
 
             hit = Physics.RaycastAll(spawnPos[temp_i].position +    // 임의의 생성 좌표에 땅이 있는지 탐색
@@ -145,9 +142,11 @@ public class Spawner : MonoBehaviour
                                     Vector3.down, 20f, 
                                     LayerMask.GetMask("Ground"));
 
-            if (null != hit)                                        // 땅이 있다면 충돌한 곳의 좌표 return;
+            if (0 != hit.Length)                                        // 땅이 있다면 충돌한 곳의 좌표 return;
             {
-                pos = hit[0].transform.position;
+                Debug.Log("터레인에 맞았어용");
+                Debug.Log(hit[0].point);
+                pos = hit[0].point;
                 return pos;
             }
             else                                                    // 땅이 없다면 해당 좌표를 중복검사 리스트에 넣고

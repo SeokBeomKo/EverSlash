@@ -1331,6 +1331,9 @@ MonoBehaviour:
   commonInterval: 2
   eliteInterval: 4
   bossInterval: 8
+  commonSeconds: 
+  eliteSeconds: 
+  bossSeconds: 
 --- !u!1 &685910086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1524,7 @@ GameObject:
   - component: {fileID: 805702367}
   - component: {fileID: 805702366}
   - component: {fileID: 805702365}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2759,7 +2762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5298590762127773683, guid: cad9f745870d9f448bf225d2a253d382, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cad9f745870d9f448bf225d2a253d382, type: 3}
@@ -3643,7 +3646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5298590762127773683, guid: cad9f745870d9f448bf225d2a253d382, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cad9f745870d9f448bf225d2a253d382, type: 3}

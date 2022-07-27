@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         dustObj = defaultdustObj;
 
         // HUD UI
-        hpSlider = UIManager.Instance.healthBar;
+        hpSlider = UIManager.instance.healthBar;
     }
 
     private void Update() {

@@ -26,7 +26,8 @@ public class Timer : MonoBehaviour
         var wait = new WaitForSeconds(1f);
         while(isDoing)
         {
-            isDoing = GameManager.instance.isAlive;
+            Debug.Log("타이머 돌아");
+            //isDoing = GameManager.instance.isAlive;
             SynchroTime();
             yield return wait;
 

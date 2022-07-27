@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     public int bossIndex = 0;
 
 
-    private void OnEnable() {
+    private void Start() {
         TimeManager.instance.eventPerSecond += SpawnRandomPattern;
     }
     private void OnDisable() {
@@ -39,11 +39,13 @@ public class Spawner : MonoBehaviour
 
     public void SpawnRandomPattern(int time)
     {
+        Debug.Log(time);
         if(time == spawnSeconds[commonIndex])
         {
+            Debug.Log("common1");
             patternType = PatternType.common;
             SpawnEnemy(SpawnManager.instance.CommonSpawn());
-
+            Debug.Log("common2");
             commonIndex++;
         }
         if(time == spawnSeconds[eliteIndex])
@@ -75,12 +77,15 @@ public class Spawner : MonoBehaviour
             switch(patternType)
             {
                 case PatternType.common:
-                    int temp = Random.Range(0,spawnList.commonDatas.Length);
-                    GameObject Enemy = ObjectPooler.SpawnFromPool(spawnList.commonDatas[temp],SetPos());
+                    Debug.Log("일반 생성");
+                    //int temp = Random.Range(0,spawnList.commonDatas.Length);
+                    //GameObject Enemy = ObjectPooler.SpawnFromPool(spawnList.commonDatas[temp],SetPos());
                     break;
                 case PatternType.elite:
+                    Debug.Log("엘리트 생성");
                     break;
                 case PatternType.boss:
+                    Debug.Log("보스 생성");
                     break;
             }
 
@@ -95,12 +100,12 @@ public class Spawner : MonoBehaviour
     public Vector3 SetPos()
     {
         RaycastHit[] hit;                           // 레이캐스트 결과 값 저장
-        Vector3 pos;                                // 적 소환 좌표 리턴값
+        Vector3 pos;                                // 적 생성 좌표 리턴값
         List<int> temp_i_list = new List<int>();    // 중복 좌표 지정 막기위한 리스트
 
         while(true)
         {
-            int temp_i = Random.Range(0, spawnPos.Length);      // 임의의 소환 좌표 선택
+            int temp_i = Random.Range(0, spawnPos.Length);      // 임의의 생성 좌표 선택
 
             for (int i = 0; i < 1;)                             
             {
@@ -114,7 +119,7 @@ public class Spawner : MonoBehaviour
                 }
             }
 
-            hit = Physics.RaycastAll(spawnPos[temp_i].position +    // 임의의 소환 좌표에 땅이 있는지 탐색
+            hit = Physics.RaycastAll(spawnPos[temp_i].position +    // 임의의 생성 좌표에 땅이 있는지 탐색
                                     (Vector3.up * 10f),    
                                     Vector3.down, 20f, 
                                     LayerMask.GetMask("Ground"));

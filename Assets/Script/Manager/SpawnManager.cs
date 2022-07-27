@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public SpawnPatternList patternList;
+    public SpawnPatternList patternData;
 
     public static SpawnManager instance;
     private void Awake()
@@ -18,14 +18,17 @@ public class SpawnManager : MonoBehaviour
 
     public PatternData CommonSpawn()
     {
-        return patternList.commonPatternDatas[Random.Range(0, patternList.commonPatternDatas.Length)];
+        Debug.Log("패턴데이터 줘");
+        Debug.Log(patternData.commonPatternDatas.Length);
+        Debug.Log(patternData.commonPatternDatas[0].Name);
+        return patternData.commonPatternDatas[Random.Range(0, patternData.commonPatternDatas.Length)];
     }
     public PatternData EliteSpawn()
     {
-        return patternList.elitePatternDatas[Random.Range(0, patternList.elitePatternDatas.Length)];
+        return patternData.elitePatternDatas[Random.Range(0, patternData.elitePatternDatas.Length)];
     }
     public PatternData BossSpawn()
     {
-        return patternList.bossPatternDatas[Random.Range(0, patternList.bossPatternDatas.Length)];
+        return patternData.bossPatternDatas[Random.Range(0, patternData.bossPatternDatas.Length)];
     }
 }

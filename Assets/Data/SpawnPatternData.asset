@@ -13,13 +13,21 @@ MonoBehaviour:
   m_Name: SpawnPatternData
   m_EditorClassIdentifier: 
   commonPatternDatas:
+  - Name: "2\uB9C8\uB9AC 2\uCD08"
+    EA: 2
+    Repeat: 2
+    Delay: 1
+  - Name: "3\uB9C8\uB9AC 2\uCD08"
+    EA: 3
+    Repeat: 2
+    Delay: 1
+  elitePatternDatas:
   - Name: 
     EA: 0
     Repeat: 0
     Delay: 0
+  bossPatternDatas:
   - Name: 
     EA: 0
     Repeat: 0
     Delay: 0
-  elitePatternDatas: []
-  bossPatternDatas: []

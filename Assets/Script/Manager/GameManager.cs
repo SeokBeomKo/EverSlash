@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameObject player;
-    public bool isAlive;
+    public bool isAlive = true;
 
     private void Awake()
     {

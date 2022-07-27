@@ -79,10 +79,10 @@ public class SelectCharacterSlot : MonoBehaviour
     }
     
     public void Creat(){
-        SceneManager.LoadScene("02.ClassSelect");
+        SceneManager.LoadScene(2);
     }
     public void Play(){
-        SceneManager.LoadScene("03.GameScene");
+        SceneManager.LoadScene(3);
     }
     public void Delete(){
         DataManager.instance.DeleteData();

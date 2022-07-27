@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class UIManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static GameManager instance;
+
+    public GameObject player;
+    public bool isAlive = true;
+
     private void Awake()
     {
         #region 싱글톤
@@ -14,5 +17,9 @@ public class UIManager : MonoBehaviour
         #endregion
     }
 
-    public HealthBar healthBar;
+    private void Start() {
+        isAlive = true;
+    }
+
+    
 }

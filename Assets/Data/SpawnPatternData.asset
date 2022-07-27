@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2513a83d1bab64d9d8776718e37b15, type: 3}
+  m_Name: SpawnPatternData
+  m_EditorClassIdentifier: 
+  commonPatternDatas:
+  - patternType: 0
+    Name: "2\uB9C8\uB9AC 2\uCD08"
+    EA: 2
+    Repeat: 2
+    Delay: 1
+  - patternType: 0
+    Name: "3\uB9C8\uB9AC 2\uCD08"
+    EA: 3
+    Repeat: 2
+    Delay: 1
+  elitePatternDatas:
+  - patternType: 1
+    Name: "1\uB9C8\uB9AC 2\uCD08"
+    EA: 1
+    Repeat: 2
+    Delay: 5
+  bossPatternDatas:
+  - patternType: 2
+    Name: "1\uB9C8\uB9AC 30\uCD08"
+    EA: 1
+    Repeat: 1
+    Delay: 30

@@ -9,6 +9,9 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        if (target == null)
+            target = GameManager.instance.player.transform;
+
         transform.position = target.position + offset;
     }
 }

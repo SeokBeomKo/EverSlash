@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour
+public class PlayerSpawn : MonoBehaviour
 {
-    public GameObject[] classList;
+    [SerializeField] GameObject[] classList;
     GameObject player;
 
     private void Start() {
         DataManager.instance.LoadData();
         player = Instantiate(classList[DataManager.instance.nowPlayer.playerClass]);
+
+        GameManager.instance.player = player.transform.GetChild(0).gameObject;
     }
 }

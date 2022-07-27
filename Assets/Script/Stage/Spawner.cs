@@ -2,29 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PatternType
-{
-    common,
-    elite,
-    boss
-}
-
 public class Spawner : MonoBehaviour
 {
     PatternType patternType;
 
-    [SerializeField] Transform target;
-    [SerializeField] Transform[] spawnPos;
-    [SerializeField] SpawnList spawnList;
+    [SerializeField] Transform      target;
+    [SerializeField] Transform[]    spawnPos;
+    [SerializeField] SpawnList      spawnList;
 
-    public int[] spawnSeconds = new int[]{1,3,5,7,9};
-    public int commonIndex = 0;
-    public int eliteIndex = 0;
-    public int bossIndex = 0;
+    public int commonInterval;
+    public int eliteInterval;
+    public int bossInterval;
 
+    [SerializeField] List<int> commonSeconds = new List<int>();
+    [SerializeField] List<int> eliteSeconds = new List<int>();
+    [SerializeField] List<int> bossSeconds = new List<int>();
+
+    int commonIndex = 0;
+    int eliteIndex  = 0;
+    int bossIndex   = 0;
 
     private void Start() {
         TimeManager.instance.eventPerSecond += SpawnRandomPattern;
+        int temp_i_common   = commonInterval;
+        int temp_i_elite    = eliteInterval;
+        int temp_i_boss     = bossInterval;
+
+        for (int i = 0; i < 1;)
+        {
+            if (temp_i_common < 600)
+            {
+                commonSeconds.Add(temp_i_common);
+                temp_i_common += commonInterval;
+            }
+            else
+            {
+                commonSeconds.TrimExcess();
+                eliteSeconds.TrimExcess();
+                bossSeconds.TrimExcess();
+                i++;
+            }
+            if (temp_i_elite < 600)
+            {
+                eliteSeconds.Add(temp_i_elite);
+                temp_i_elite += eliteInterval;
+            }
+            if (temp_i_boss < 600)
+            {
+                bossSeconds.Add(temp_i_boss);
+                temp_i_boss += bossInterval;
+            }
+        }
     }
     private void OnDisable() {
         TimeManager.instance.eventPerSecond -= SpawnRandomPattern;
@@ -39,42 +67,35 @@ public class Spawner : MonoBehaviour
 
     public void SpawnRandomPattern(int time)
     {
-        Debug.Log(time);
-        if(time == spawnSeconds[commonIndex])
+        if(commonSeconds.Contains(time))
         {
-            Debug.Log("common1");
-            patternType = PatternType.common;
-            SpawnEnemy(SpawnManager.instance.CommonSpawn());
-            Debug.Log("common2");
-            commonIndex++;
+            StartCoroutine(SpawnEnemy(SpawnManager.instance.CommonSpawn()));
+
+            commonSeconds.Remove(time);
         }
-        if(time == spawnSeconds[eliteIndex])
+        if(eliteSeconds.Contains(time))
         {
-            patternType = PatternType.elite;
             SpawnEnemy(SpawnManager.instance.EliteSpawn());
 
-            eliteIndex++;
+            eliteSeconds.Remove(time);
         }
-        if(time == spawnSeconds[bossIndex])
+        if(bossSeconds.Contains(time))
         {
-            patternType = PatternType.boss;
             SpawnEnemy(SpawnManager.instance.BossSpawn());
 
-            bossIndex++;
+            bossSeconds.Remove(time);
         }
-        
-
     }
 
     public IEnumerator SpawnEnemy(PatternData patternData, bool isRepeat = true)
     {
         var wait = new WaitForSeconds(patternData.Delay);
-        
+        Debug.Log("패턴 딜레이" + patternData.Delay);
         int repeatCount = patternData.Repeat;
 
         while(isRepeat)
         {
-            switch(patternType)
+            switch(patternData.patternType)
             {
                 case PatternType.common:
                     Debug.Log("일반 생성");

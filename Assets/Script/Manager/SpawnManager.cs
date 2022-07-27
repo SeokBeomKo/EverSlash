@@ -18,9 +18,6 @@ public class SpawnManager : MonoBehaviour
 
     public PatternData CommonSpawn()
     {
-        Debug.Log("패턴데이터 줘");
-        Debug.Log(patternData.commonPatternDatas.Length);
-        Debug.Log(patternData.commonPatternDatas[0].Name);
         return patternData.commonPatternDatas[Random.Range(0, patternData.commonPatternDatas.Length)];
     }
     public PatternData EliteSpawn()

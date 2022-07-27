@@ -1328,10 +1328,9 @@ MonoBehaviour:
   - {fileID: 1066557093}
   - {fileID: 549801311}
   spawnList: {fileID: 11400000, guid: d8b4278d478e52d478f6fa0df4b4e7f4, type: 2}
-  spawnSeconds: 0100000003000000050000000700000009000000
-  commonIndex: 0
-  eliteIndex: 0
-  bossIndex: 0
+  commonInterval: 2
+  eliteInterval: 4
+  bossInterval: 8
 --- !u!1 &685910086
 GameObject:
   m_ObjectHideFlags: 0

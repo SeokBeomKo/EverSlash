@@ -21,7 +21,6 @@ public struct PatternData{
 [CreateAssetMenu(fileName = "SpawnPatternData", menuName ="Data/SpawnPattern")]
 public class SpawnPatternList : ScriptableObject
 {
-
     public PatternData[] commonPatternDatas;
     public PatternData[] elitePatternDatas;
     public PatternData[] bossPatternDatas;

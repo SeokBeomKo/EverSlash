@@ -2,16 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PatternType
-{
-    pattern1,
-    pattern2,
-
-}
-
 public class SpawnManager : MonoBehaviour
 {
-    public SpawnPatternList spawnList;
+    public SpawnPatternList patternList;
 
     public static SpawnManager instance;
     private void Awake()
@@ -23,18 +16,16 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-
-
     public PatternData CommonSpawn()
     {
-        return spawnList.commonPatternDatas[Random.Range(0, spawnList.commonPatternDatas.Length)];
+        return patternList.commonPatternDatas[Random.Range(0, patternList.commonPatternDatas.Length)];
     }
     public PatternData EliteSpawn()
     {
-        return spawnList.elitePatternDatas[Random.Range(0, spawnList.elitePatternDatas.Length)];
+        return patternList.elitePatternDatas[Random.Range(0, patternList.elitePatternDatas.Length)];
     }
     public PatternData BossSpawn()
     {
-        return spawnList.bossPatternDatas[Random.Range(0, spawnList.bossPatternDatas.Length)];
+        return patternList.bossPatternDatas[Random.Range(0, patternList.bossPatternDatas.Length)];
     }
 }

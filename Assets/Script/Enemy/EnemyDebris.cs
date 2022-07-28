@@ -7,8 +7,8 @@ public class EnemyDebris : MonoBehaviour
     [SerializeField] GameObject Prefabs = null;
     [SerializeField] float m_force;
     [SerializeField] Vector3 m_offset = Vector3.zero;
-    public Rigidbody[] rigid;
-    public Vector3[] pos;
+    Rigidbody[] rigid;
+    Vector3[] pos;
 
     private void Awake() {
         rigid = gameObject.GetComponentsInChildren<Rigidbody>();

@@ -12,7 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51aefff8ede8b3458f6a530c97ce44a, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  Type: 0
-  commonint: 0
-  eliteint: 0
-  bossint: 0
+  Type: 5
+  enemyInfo:
+    name: 
+    hp: 0
+    att: 0
+    ignore: 0
+    def: 0
+    exp: 0
+  normalInfo:
+    temp: 0
+  dashInfo:
+    temp: 0
+  bombInfo:
+    temp: 0
+  smashInfo:
+    temp: 0
+  areaInfo:
+    temp: 0
+  shootInfo:
+    temp: 0

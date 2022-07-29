@@ -11,6 +11,7 @@ public struct EnemyMaterial
 }
 abstract public class Enemy : MonoBehaviour
 {
+    public EnemyInfo enemyInfo; 
     public Transform target;
     public int maxHp;
     public int curHp;
@@ -20,6 +21,8 @@ abstract public class Enemy : MonoBehaviour
     public int ignore;
     public int defence;
     public int expDrop;
+
+    public EnemyMaterial enemtMatarial;
 
     private void OnEnable()
     {

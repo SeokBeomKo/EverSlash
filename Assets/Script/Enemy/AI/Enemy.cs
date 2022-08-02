@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public struct EnemyMaterial
 {
@@ -11,10 +12,12 @@ public struct EnemyMaterial
 }
 abstract public class Enemy : MonoBehaviour
 {
+    [SerializeField] public EnemyData enemyData;
     public EnemyInfo enemyInfo; 
     public Transform target;
     public int maxHp;
     public int curHp;
+    public NavMeshAgent nav;
     public float moveSpeed;
     public float attackSpeed;
     public int attack;
@@ -24,9 +27,16 @@ abstract public class Enemy : MonoBehaviour
 
     public EnemyMaterial enemtMatarial;
 
-    private void OnEnable()
+    // 게임 시작시 설정
+    private void Awake() 
     {
         target = GameManager.instance.player.transform;
+        nav = GetComponent<NavMeshAgent>();    
+    }
+
+    // 오브젝트 풀링 시작시 설정
+    private void OnEnable()
+    {
         curHp = maxHp;
     }
 

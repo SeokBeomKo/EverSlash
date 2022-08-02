@@ -26,7 +26,7 @@ public enum EnemyType
 
 [Serializable] public struct NormalInfo
 {
-    public int temp;
+    public int moveSpeed;
 }
 
 [Serializable] public struct DashInfo

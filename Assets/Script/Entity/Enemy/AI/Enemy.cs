@@ -3,29 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public struct EnemyMaterial
-{
-    public SkinnedMeshRenderer meshRenderer;
-    public Color origin_1;
-    public Color origin_2;
-    public Color origin_3;
-}
-abstract public class Enemy : MonoBehaviour
-{
-    [SerializeField] public EnemyData enemyData;
-    public EnemyInfo enemyInfo; 
-    public Transform target;
-    public int maxHp;
-    public int curHp;
-    public NavMeshAgent nav;
-    public float moveSpeed;
-    public float attackSpeed;
-    public int attack;
-    public int ignore;
-    public int defence;
-    public int expDrop;
 
-    public EnemyMaterial enemtMatarial;
+abstract public class Enemy : Entity
+{
+    [SerializeField] public EnemyData enemyData;    // 적 타입에 따른 데이터 스크립터블오브젝트
+    public EnemyInfo enemyInfo;                     // 적 공통 데이터
+    public Transform target;                        // 추적 대상
+    public NavMeshAgent nav;                        // 추적 네비매쉬
 
     // 게임 시작시 설정
     private void Awake() 

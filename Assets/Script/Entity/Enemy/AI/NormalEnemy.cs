@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaEnemy : Enemy
+public class NormalEnemy : Enemy
 {
-    public AreaInfo areaInfo;
+    public NormalInfo normalInfo;
     override public void Attack()
     {
 
@@ -15,6 +15,6 @@ public class AreaEnemy : Enemy
     }
     override public void Tracing()
     {
-
+        nav.SetDestination(target.position);
     }
 }

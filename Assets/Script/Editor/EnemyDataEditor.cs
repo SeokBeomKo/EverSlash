@@ -20,8 +20,6 @@ public class EnemyDataEditor : Editor
             dashInfo = serializedObject.FindProperty("dashInfo");
             bombInfo = serializedObject.FindProperty("bombInfo");
             smashInfo = serializedObject.FindProperty("smashInfo");
-            areaInfo = serializedObject.FindProperty("areaInfo");
-            shootInfo = serializedObject.FindProperty("shootInfo");
         }
     }
 
@@ -46,14 +44,6 @@ public class EnemyDataEditor : Editor
             case EnemyType.Smash:
                 EditorGUILayout.PropertyField(enemyInfo);
                 EditorGUILayout.PropertyField(smashInfo);
-                break;
-            case EnemyType.Area:
-                EditorGUILayout.PropertyField(enemyInfo);
-                EditorGUILayout.PropertyField(areaInfo);
-                break;
-            case EnemyType.Shoot:
-                EditorGUILayout.PropertyField(enemyInfo);
-                EditorGUILayout.PropertyField(shootInfo);
                 break;
         }
 

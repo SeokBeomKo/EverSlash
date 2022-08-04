@@ -9,9 +9,7 @@ public enum EnemyType
     Normal,     // 일반형 몬스터
     Dash,       // 돌진형 몬스터
     Bomb,       // 자폭형 몬스터
-    Smash,      // 강공형 몬스터
-    Area,       // 범위형 몬스터
-    Shoot       // 발사형 몬스터
+    Smash       // 강공형 몬스터
 }
 
 [Serializable] public struct EnemyInfo
@@ -44,16 +42,6 @@ public enum EnemyType
     public int temp;
 }
 
-[Serializable] public struct AreaInfo
-{
-    public int temp;
-}
-
-[Serializable] public struct ShootInfo
-{
-    public int temp;
-}
-
 
 
 [CreateAssetMenu(fileName = "EnemyData", menuName ="Data/EnemyData")]
@@ -65,6 +53,4 @@ public class EnemyData : ScriptableObject
     public DashInfo dashInfo;
     public BombInfo bombInfo;
     public SmashInfo smashInfo;
-    public AreaInfo areaInfo;
-    public ShootInfo shootInfo;
 }

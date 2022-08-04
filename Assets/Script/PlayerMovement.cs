@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject attackCollision;
 
     private void Start() {
-        playerdata = DataManager.instance.nowPlayer;
+        //playerdata = DataManager.instance.nowPlayer;
     }
     private void Awake() {
         anim = GetComponentInChildren<PlayerAnimator>();
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         dustObj = defaultdustObj;
 
         // HUD UI
-        hpSlider = UIManager.instance.healthBar;
+        // hpSlider = UIManager.instance.healthBar;
     }
 
     private void Update() {

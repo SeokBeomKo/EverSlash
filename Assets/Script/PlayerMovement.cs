@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerData playerdata;
+    UserData playerdata;
     public float playerSpeed;
     private float moveSpeed;
     public int maxHealth;
     public int curHealth;
 
+    public int defence;
     public int minDamage;
     public int maxDamage;
     float  hAxis;
@@ -50,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
         moveSpeed = playerSpeed;
         dustObj = defaultdustObj;
+        defence = 1;
 
         // HUD UI
         // hpSlider = UIManager.instance.healthBar;
@@ -211,14 +213,8 @@ public class PlayerMovement : MonoBehaviour
         slashes[code].gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == "EnemyAttack"){
-            TakeDamage(other);
-            StartCoroutine(OnDamage(transform.position));
-        }
-    }
-
-    IEnumerator OnDamage(Vector3 reactVec){
+    public IEnumerator OnDamage(int damage){
+        TakeDamage(damage);
         for (int i = 0; i < meshRenderer.Length; i++){
             meshRenderer[i].material.SetColor("_BaseColor",Color.red);
             meshRenderer[i].material.SetColor("_1st_ShadeColor",Color.red);
@@ -242,10 +238,17 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
     }
-    private void TakeDamage(Collider other){
-        int rand = other.GetComponent<AttackCollider>().TurnDamage();
-        curHealth -= rand; 
+    private void TakeDamage(int _damage){
+        int damage = _damage - defence;
 
-        hpSlider.SetHP(curHealth);
+        if (0 >= damage)
+        {
+            return;
+        }
+        else
+        {
+            curHealth -= damage;
+            hpSlider.SetHP(curHealth);
+        }
     }
 }

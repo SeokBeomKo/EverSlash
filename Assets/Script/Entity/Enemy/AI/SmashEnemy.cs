@@ -9,7 +9,7 @@ public class SmashEnemy : Enemy
     {
 
     }
-    override public void AttackReady()
+    override public void AttackCheck()
     {
 
     }

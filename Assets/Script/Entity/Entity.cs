@@ -11,12 +11,14 @@ public struct EntityMaterial
 }
 abstract public class Entity : MonoBehaviour
 {
-    public int maxHp;           // 최대 체력
-    public int curHp;           // 현재 체력
-    public float moveSpeed;     // 이동 속도
-    public float attackSpeed;   // 공격 속도
-    public int attack;          // 공격력
-    public int ignore;          // 방어력 관통
-    public int defence;         // 방어력
-    EntityMaterial material;    // 메테리얼
+    public int maxHp;                   // 최대 체력
+    public int curHp;                   // 현재 체력
+    public float moveSpeed;             // 이동 속도
+    public float attackSpeed;           // 공격 속도
+    public int attackMin;               // 최소 공격력
+    public int attackMax;               // 최대 공격력
+    public int ignore;                  // 방어력 관통
+    public int defence;                 // 방어력
+    public EntityMaterial material;     // 메테리얼
+    public abstract IEnumerator OnDamage();
 }

@@ -9,7 +9,7 @@ public class DashEnemy : Enemy
     {
 
     }
-    override public void AttackReady()
+    override public void AttackCheck()
     {
 
     }

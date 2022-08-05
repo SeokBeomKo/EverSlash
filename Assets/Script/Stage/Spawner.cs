@@ -144,8 +144,6 @@ public class Spawner : MonoBehaviour
 
             if (0 != hit.Length)                                        // 땅이 있다면 충돌한 곳의 좌표 return;
             {
-                Debug.Log("터레인에 맞았어용");
-                Debug.Log(hit[0].point);
                 pos = hit[0].point;
                 return pos;
             }

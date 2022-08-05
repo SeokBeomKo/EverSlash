@@ -95,7 +95,7 @@ public class EnemyAI : MonoBehaviour
         anim.OnTrace(false);
         anim.OnAttack();
 
-        yield return new WaitForSeconds(1f); // 공격 애니메이션 스피드 변경시 변경해야함
+        yield return new WaitForSeconds(0.1f); // 공격 애니메이션 스피드 변경시 변경해야함
         isAttack = false;
         anim.OnTrace(true);
     }

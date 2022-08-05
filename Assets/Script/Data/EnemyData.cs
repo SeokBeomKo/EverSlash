@@ -15,10 +15,12 @@ public enum EnemyType
 [Serializable] public struct EnemyInfo
 {
     public string name;     // 이름
+    public float distance;  // 공격 인식범위
+    public float range;     // 공격 범위
     public int hp;          // 체력
-    public int att;         // 공격력
+    public int attack;         // 공격력
     public int ignore;      // 방어 관통
-    public int def;         // 방어력
+    public int defence;         // 방어력
     public int exp;         // 경험치
 }
 

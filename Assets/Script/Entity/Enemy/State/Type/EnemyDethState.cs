@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackState : EnemyState
+public class EnemyDethState : EnemyState
 {
-    // 적의 공격 상태
-    // do : 공격 후 대기 상태로 변환
+    // 적의 죽음 상태
+    // do : disable 로 전환
     public void Excute(NormalEnemy enemy, EnemyStateMachine stateMachine)
     {
 
@@ -20,15 +20,15 @@ public class EnemyAttackState : EnemyState
     }
     public void Excute(BombEnemy enemy, EnemyStateMachine stateMachine)
     {
-
+        
     }
 
     public void StateEnter(Enemy enemy)
     {
-        enemy.enemyAnim.SetTrigger("isAttack");
+        // TODO : 파편 휘날리기
     }
     public void StateExit(Enemy enemy)
     {
-        enemy.enemyAnim.ResetTrigger("isAttack");
+        
     }
 }

@@ -9,6 +9,6 @@ public interface EnemyState
     public void Excute(SmashEnemy   enemy, EnemyStateMachine stateMachine);
     public void Excute(BombEnemy    enemy, EnemyStateMachine stateMachine);
 
-    public void StateEnter(Enemy enemy);
-    public void StateExit(Enemy enemy);
+    public void StateEnter(Enemy    enemy);
+    public void StateExit(Enemy     enemy);
 }

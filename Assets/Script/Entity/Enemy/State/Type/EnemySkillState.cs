@@ -5,11 +5,7 @@ using UnityEngine;
 public class EnemySkillState : EnemyState
 {
     // 적의 스킬 상태
-    // if : 플레이어가 공격범위 내에 있는가?
-    // true : if : 스킬 조건을 만족했는가?
-        // true : 스킬 상태 유지
-        // false : 공격 상태로 변경
-    // false : 추적 상태로 변경
+    // do : 스킬 사용 후 대기 상태로 변환
     public void Excute(NormalEnemy enemy, EnemyStateMachine stateMachine)
     {
 
@@ -29,10 +25,10 @@ public class EnemySkillState : EnemyState
 
     public void StateEnter(Enemy enemy)
     {
-
+        enemy.enemyAnim.SetTrigger("isSkill");
     }
     public void StateExit(Enemy enemy)
     {
-        
+        enemy.enemyAnim.ResetTrigger("isSkill");
     }
 }

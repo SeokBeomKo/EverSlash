@@ -10,12 +10,14 @@ public enum _EnemyState
 
 abstract public class Enemy : Entity, IDamageable, IDropExp
 {
-    [SerializeField] public EnemyData enemyData;                        // 적 타입에 따른 데이터 스크립터블오브젝트
-    [SerializeField] protected EnemyInfo enemyInfo;                     // 적 공통 데이터
-    [SerializeField] protected Animator enemyAnim;                      // 적 애니메이터
+    [SerializeField] private EnemyData enemyData;                        // 적 타입에 따른 데이터 스크립터블오브젝트
+    [SerializeField] public EnemyInfo enemyInfo;                     // 적 공통 데이터
+    [SerializeField] public Animator enemyAnim;                      // 적 애니메이터
     [SerializeField] protected Transform target;                        // 추적 대상
     [SerializeField] protected NavMeshAgent nav;                        // 추적 네비매쉬
     [SerializeField] protected SphereCollider attackRange;              // 공격 인식 범위
+
+    public EnemyStateMachine stateMachine;
     private _EnemyState _enemyState;                                     // 현재 상태
     protected _EnemyState enemyState {
                                     get{return _enemyState;}

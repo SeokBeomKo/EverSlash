@@ -35,7 +35,7 @@ public enum EnemyType
 }
 
 [Serializable] public struct BombInfo
-{
+{   
     public int temp;
 }
 

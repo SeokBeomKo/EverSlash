@@ -22,20 +22,20 @@ public class NormalEnemy : Enemy
 
     override public void AttackCheck()
     {
-        if (enemyInfo.distance >= Vector3.Distance(target.transform.position,transform.position))
-        {
-            enemyState = _EnemyState.Attack;
-        }
-        else
-        {
-            enemyState = _EnemyState.Trace;
-        }
+        // if (enemyInfo.distance >= Vector3.Distance(target.transform.position,transform.position))
+        // {
+        //     enemyState = _EnemyState.Attack;
+        // }
+        // else
+        // {
+        //     enemyState = _EnemyState.Trace;
+        // }
     }
     override public void Tracing()
     {
-        if (enemyState == _EnemyState.Trace){
-            if (target != null)
-                nav.SetDestination(target.position);
-        }
+        // if (enemyState == _EnemyState.Trace){
+        //     if (target != null)
+        //         nav.SetDestination(target.position);
+        // }
     }
 }

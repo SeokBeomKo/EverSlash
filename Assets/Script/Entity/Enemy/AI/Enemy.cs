@@ -3,42 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum _EnemyState
-{
-    Trace, Attack, Hit, Skill
-}
-
 abstract public class Enemy : Entity, IDamageable, IDropExp
 {
-    [SerializeField] private EnemyData enemyData;                        // 적 타입에 따른 데이터 스크립터블오브젝트
-    [SerializeField] public EnemyInfo enemyInfo;                     // 적 공통 데이터
-    [SerializeField] public Animator enemyAnim;                      // 적 애니메이터
-    [SerializeField] protected Transform target;                        // 추적 대상
-    [SerializeField] protected NavMeshAgent nav;                        // 추적 네비매쉬
-    [SerializeField] protected SphereCollider attackRange;              // 공격 인식 범위
+    [SerializeField] private EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
+    [SerializeField] public EnemyInfo           enemyInfo;          // 적 공통 데이터
+    [SerializeField] public Animator            enemyAnim;          // 적 애니메이터
+    [SerializeField] public Transform           target;             // 추적 대상
+    [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬
+    [SerializeField] public SphereCollider      attackRange;        // 공격 인식 범위
 
-    public EnemyStateMachine stateMachine;
-    private _EnemyState _enemyState;                                     // 현재 상태
-    protected _EnemyState enemyState {
-                                    get{return _enemyState;}
-                                    set{StateExit(_enemyState);
-                                        _enemyState = value;
-                                        StateEnter(_enemyState);}
-                                    }         
+    public EnemyStateMachine stateMachine; 
+      
 
     // 게임 시작시 설정
     private void Awake() 
     {
-        enemyAnim = GetComponent<Animator>();
-        nav = GetComponent<NavMeshAgent>();
-        material.meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        enemyAnim               = GetComponent<Animator>();
+        nav                     = GetComponent<NavMeshAgent>();
+        material.meshRenderer   = GetComponentInChildren<SkinnedMeshRenderer>();
 
-        material.origin_1 = material.meshRenderer.material.GetColor("_BaseColor");
-        material.origin_2 = material.meshRenderer.material.GetColor("_1st_ShadeColor");
-        material.origin_3 = material.meshRenderer.material.GetColor("_2nd_ShadeColor");
+        material.origin_1       = material.meshRenderer.material.GetColor("_BaseColor");
+        material.origin_2       = material.meshRenderer.material.GetColor("_1st_ShadeColor");
+        material.origin_3       = material.meshRenderer.material.GetColor("_2nd_ShadeColor");
 
         // 적 공통 데이터 적용
         enemyInfo = enemyData.enemyInfo;
+
+        // 적 이동 속도 설정
+        nav.speed = enemyInfo.moveSpeed;
 
         // 추적 대상 설정
         StartCoroutine(Set());
@@ -52,7 +44,7 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
     // 오브젝트 풀링 시작시 설정
     private void OnEnable()
     {
-        enemyState = _EnemyState.Trace;
+        stateMachine.StartState(this);
         curHp = maxHp;
     }
 
@@ -72,58 +64,15 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
     abstract public void Attack();          // 공격 행동
     abstract public void AttackCheck();     // 공격 조건 체크
     abstract public void Tracing();         // 추적 행동
-    virtual public void Skill(){}           // 스킬 행동
-    virtual public void SkillCheck(){}      // 스킬 행동
-
-    public void StateEnter(_EnemyState state)
-    {
-        switch(state)
-        {
-            case _EnemyState.Trace:
-            enemyAnim.SetBool("isTrace",true);
-            break;
-            case _EnemyState.Attack:
-            // Attack(); TODO : 애니메이션에 집어넣기
-            enemyAnim.SetTrigger("isAttack");
-            break;
-            case _EnemyState.Hit:
-            StartCoroutine(OnDamage());
-            enemyAnim.SetTrigger("isHit");
-            break;
-            case _EnemyState.Skill:
-            Skill();
-            enemyAnim.SetTrigger("isSkill");
-            break;
-            default:
-            break;
-        }
-    }
-    public void StateExit(_EnemyState state)
-    {
-        switch(state)
-        {
-            case _EnemyState.Trace:
-            enemyAnim.SetBool("isTrace",false);
-            break;
-            case _EnemyState.Attack:
-            enemyAnim.ResetTrigger("isAttack");
-            break;
-            case _EnemyState.Hit:
-            enemyAnim.ResetTrigger("isHit");
-            break;
-            case _EnemyState.Skill:
-            enemyAnim.ResetTrigger("isSkill");
-            break;
-            default:
-            break;
-        }
-    }
+    virtual  public void Skill(){}           // 스킬 행동
+    virtual  public void SkillCheck(){}      // 스킬 행동
 
     public override IEnumerator OnDamage()
     {
         material.meshRenderer.material.SetColor("_BaseColor",       Color.red);
         material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
         material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.red);
+
         yield return new WaitForSeconds(0.1f);
 
         if (curHp > 0){
@@ -148,7 +97,7 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
     {
         if (other.tag == "PlayerAttack")
         {
-            enemyState = _EnemyState.Hit;
+            
         }
     }
 }

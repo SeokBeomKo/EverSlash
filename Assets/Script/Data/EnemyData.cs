@@ -14,19 +14,20 @@ public enum EnemyType
 
 [Serializable] public struct EnemyInfo
 {
-    public string name;     // 이름
-    public float distance;  // 공격 인식범위
-    public float range;     // 공격 범위
-    public int hp;          // 체력
-    public int attack;         // 공격력
-    public int ignore;      // 방어 관통
+    public string name;         // 이름
+    public float moveSpeed;     // 이동 속도
+    public int hp;              // 체력
+    public float distance;      // 공격 인식범위
+    public float range;         // 공격 범위
+    public int attack;          // 공격력
+    public float attackDelay;   // 공격 딜레이
+    public int ignore;          // 방어 관통
     public int defence;         // 방어력
-    public int exp;         // 경험치
+    public int exp;             // 경험치
 }
 
 [Serializable] public struct NormalInfo
 {
-    public int moveSpeed;
 }
 
 [Serializable] public struct DashInfo

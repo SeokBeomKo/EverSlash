@@ -11,20 +11,27 @@ public class EnemyHitState : EnemyState
         // false : 경직 시간 후 추격 상태로 변환
     // false : 죽음 상태로 변환
 
+    public EnemyStateMachine stateMachine { get; set; }
+
+    public void Init(EnemyStateMachine stateMachine)
+    {
+        this.stateMachine = stateMachine;
+    }
+
     public WaitForSeconds wait = new WaitForSeconds(0.2f);
-    public void Excute(NormalEnemy enemy, EnemyStateMachine stateMachine)
+    public void Excute(NormalEnemy enemy)
     {
 
     }
-    public void Excute(DashEnemy enemy, EnemyStateMachine stateMachine)
+    public void Excute(DashEnemy enemy)
     {
 
     }
-    public void Excute(SmashEnemy enemy, EnemyStateMachine stateMachine)
+    public void Excute(SmashEnemy enemy)
     {
 
     }
-    public void Excute(BombEnemy enemy, EnemyStateMachine stateMachine)
+    public void Excute(BombEnemy enemy)
     {
         
     }

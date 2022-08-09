@@ -6,35 +6,24 @@ public class EnemyAttackState : EnemyState
 {
     // 적의 공격 상태
     // do : 공격 후 대기 상태로 변환
-
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
 
     public void Init(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        this.enemy = stateMachine.enemy;
     }
-    public void Excute(NormalEnemy enemy)
+    public void Excute()
     {
-
-    }
-    public void Excute(DashEnemy enemy)
-    {
-
-    }
-    public void Excute(SmashEnemy enemy)
-    {
-
-    }
-    public void Excute(BombEnemy enemy)
-    {
-        
+        enemy.Attack();
     }
 
-    public void StateEnter(Enemy enemy)
+    public void StateEnter()
     {
         enemy.enemyAnim.SetTrigger("isAttack");
     }
-    public void StateExit(Enemy enemy)
+    public void StateExit()
     {
         enemy.enemyAnim.ResetTrigger("isAttack");
     }

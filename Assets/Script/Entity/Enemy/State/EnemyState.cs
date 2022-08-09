@@ -4,13 +4,11 @@ using UnityEngine;
 
 public interface EnemyState
 {
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
     public void Init(EnemyStateMachine stateMachine);
-    public void Excute(NormalEnemy  enemy);
-    public void Excute(DashEnemy    enemy);
-    public void Excute(SmashEnemy   enemy);
-    public void Excute(BombEnemy    enemy);
+    public void Excute();
 
-    public void StateEnter(Enemy    enemy);
-    public void StateExit(Enemy     enemy);
+    public void StateEnter();
+    public void StateExit();
 }

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-abstract public class Enemy : Entity, IDamageable, IDropExp
+abstract public class Enemy : Entity, IDropExp
 {
-    [SerializeField] private EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
+    [SerializeField] public EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
+
     [SerializeField] public EnemyInfo           enemyInfo;          // 적 공통 데이터
     [SerializeField] public Animator            enemyAnim;          // 적 애니메이터
     [SerializeField] public Transform           target;             // 추적 대상
     [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬
     [SerializeField] public SphereCollider      attackRange;        // 공격 인식 범위
+
+    [SerializeField] public GameObject          enemyObj;           // 적 
+    [SerializeField] public GameObject          enemyDbris;         // 적 파편
 
     public EnemyStateMachine stateMachine; 
       
@@ -32,6 +36,9 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
         // 적 이동 속도 설정
         nav.speed = enemyInfo.moveSpeed;
 
+        // 상태패턴기계 설정
+        stateMachine.enemy = this;
+
         // 추적 대상 설정
         StartCoroutine(Set());
     }
@@ -44,7 +51,7 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
     // 오브젝트 풀링 시작시 설정
     private void OnEnable()
     {
-        stateMachine.StartState(this);
+        stateMachine.StartState();
         curHp = maxHp;
     }
 
@@ -56,18 +63,21 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
 
     private void FixedUpdate() 
     {
-        Tracing();
-        AttackCheck();
-        SkillCheck();
+        stateMachine.curEnemyState.Excute();
     }
 
     abstract public void Attack();          // 공격 행동
-    abstract public void AttackCheck();     // 공격 조건 체크
-    abstract public void Tracing();         // 추적 행동
-    virtual  public void Skill(){}           // 스킬 행동
-    virtual  public void SkillCheck(){}      // 스킬 행동
+    abstract public void Death();           // 
+    abstract public void Idle();            //
+    abstract public void Skill();           //
+    abstract public void Trace();           //
+    virtual public void Hit()
+    {
+        if (stateMachine)
+        StartCoroutine(OnDamage(2));
+    }
 
-    public override IEnumerator OnDamage()
+    public override IEnumerator OnDamage(int damage)
     {
         material.meshRenderer.material.SetColor("_BaseColor",       Color.red);
         material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
@@ -97,7 +107,7 @@ abstract public class Enemy : Entity, IDamageable, IDropExp
     {
         if (other.tag == "PlayerAttack")
         {
-            
+            Hit();
         }
     }
 }

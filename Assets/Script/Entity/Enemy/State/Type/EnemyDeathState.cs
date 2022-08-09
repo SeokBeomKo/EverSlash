@@ -2,39 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDethState : EnemyState
+public class EnemyDeathState : EnemyState
 {
     // 적의 죽음 상태
     // do : disable 로 전환
-
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
 
     public void Init(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        this.enemy = stateMachine.enemy;
     }
-    public void Excute(NormalEnemy enemy)
+    public void Excute()
     {
 
     }
-    public void Excute(DashEnemy enemy)
-    {
 
-    }
-    public void Excute(SmashEnemy enemy)
-    {
-
-    }
-    public void Excute(BombEnemy enemy)
-    {
-        
-    }
-
-    public void StateEnter(Enemy enemy)
+    public void StateEnter()
     {
         // TODO : 파편 휘날리기
     }
-    public void StateExit(Enemy enemy)
+    public void StateExit()
     {
         
     }

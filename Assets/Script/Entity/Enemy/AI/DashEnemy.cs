@@ -5,16 +5,28 @@ using UnityEngine;
 public class DashEnemy : Enemy
 {
     public DashInfo dashInfo;
-    override public void Attack()
+    public override void Trace()
+    {
+        
+    }
+    public override void Idle()
+    {
+        
+    }
+    public override void Attack()
     {
 
     }
-    override public void AttackCheck()
+    public override void Skill()
     {
-
+        
     }
-    override public void Tracing()
+    public override void Hit()
     {
-
+        
+    }
+    public override void Death()
+    {
+        
     }
 }

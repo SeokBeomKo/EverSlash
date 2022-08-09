@@ -10,33 +10,22 @@ public class EnemyHitState : EnemyState
         // true : return;
         // false : 경직 시간 후 추격 상태로 변환
     // false : 죽음 상태로 변환
-
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
 
     public void Init(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        this.enemy = stateMachine.enemy;
     }
 
     public WaitForSeconds wait = new WaitForSeconds(0.2f);
-    public void Excute(NormalEnemy enemy)
+    public void Excute()
     {
 
     }
-    public void Excute(DashEnemy enemy)
-    {
 
-    }
-    public void Excute(SmashEnemy enemy)
-    {
-
-    }
-    public void Excute(BombEnemy enemy)
-    {
-        
-    }
-
-    public void StateEnter(Enemy enemy)
+    public void StateEnter()
     {
         enemy.enemyAnim.SetTrigger("isHit");
 
@@ -44,7 +33,7 @@ public class EnemyHitState : EnemyState
         enemy.material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
         enemy.material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.red);
     }
-    public void StateExit(Enemy enemy)
+    public void StateExit()
     {
         enemy.enemyAnim.ResetTrigger("isHit");
 

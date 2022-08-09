@@ -4,36 +4,34 @@ using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
+    public Enemy enemy;
     public EnemyState curEnemyState;
+    public Dictionary<string, EnemyState> stateDic = new Dictionary<string, EnemyState>();
 
-    public EnemyState idleState;
-    public EnemyState traceState;
-    public EnemyState attackState;
-    public EnemyState skillState;
-    public EnemyState hitState;
-    public EnemyState dethState;
+    private void Start()
+    {
+        stateDic.Add("TraceState"  , new EnemyTraceState() );
+        stateDic.Add("IdleState"   , new EnemyIdleState()  );
+        stateDic.Add("AttackState" , new EnemyAttackState());
+        stateDic.Add("SkillState"  , new EnemySkillState() );
+        stateDic.Add("HitState"    , new EnemyHitState()   );
+        stateDic.Add("DethState"   , new EnemyDeathState() );
 
-    private void Start() {
-        idleState   = new EnemyIdleState();
-        traceState  = new EnemyTraceState();
-        attackState = new EnemyAttackState();
-        skillState  = new EnemySkillState();
-        hitState    = new EnemyHitState();
-        dethState   = new EnemyDethState();
-
-        idleState  .Init(this);     traceState .Init(this);     attackState.Init(this);
-        skillState .Init(this);     hitState   .Init(this);     dethState  .Init(this);
+        foreach(EnemyState Value in stateDic.Values)
+        {
+            Value.Init(this);
+        }
     }
 
-    public void StartState(Enemy enemy)
+    public void StartState()
     {
-        curEnemyState = traceState;
-        curEnemyState.StateEnter(enemy);
+        stateDic.TryGetValue("TraceState", out curEnemyState);
+        curEnemyState.StateEnter();
     }
-    public void ChangeState(EnemyState state, Enemy enemy)
+    public void ChangeState(EnemyState state)
     {
-        curEnemyState.StateExit(enemy);
+        curEnemyState.StateExit();
         curEnemyState = state;
-        curEnemyState.StateEnter(enemy);
+        curEnemyState.StateEnter();
     }
 }

@@ -8,38 +8,24 @@ public class EnemyTraceState : EnemyState
     // if : 플레이어가 공격범위 내에 있는가?
     // true : 대기 상태로 변경
     // false : 추적 상태 유지
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
 
     public void Init(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        this.enemy = stateMachine.enemy;
     }
-    public void Excute(NormalEnemy enemy)
+    public void Excute()
     {
-        enemy.nav.SetDestination(enemy.target.position);
-        if (enemy.enemyInfo.distance >= Vector3.Distance(enemy.transform.position,enemy.target.transform.position))
-        {
-            stateMachine.ChangeState(stateMachine.idleState,enemy);
-        }
-    }
-    public void Excute(DashEnemy enemy)
-    {
-
-    }
-    public void Excute(SmashEnemy enemy)
-    {
-
-    }
-    public void Excute(BombEnemy enemy)
-    {
-        
+        enemy.Trace();
     }
 
-    public void StateEnter(Enemy enemy)
+    public void StateEnter()
     {
         enemy.enemyAnim.SetBool("isTrace",true);
     }
-    public void StateExit(Enemy enemy)
+    public void StateExit()
     {
         enemy.enemyAnim.SetBool("isTrace",false);
     }

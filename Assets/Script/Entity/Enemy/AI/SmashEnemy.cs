@@ -5,16 +5,29 @@ using UnityEngine;
 public class SmashEnemy : Enemy
 {
     public SmashInfo smashInfo;
-    override public void Attack()
+    public override void Trace()
+    {
+        
+    }
+    public override void Idle()
+    {
+        
+    }
+    public override void Attack()
     {
 
     }
-    override public void AttackCheck()
+    public override void Skill()
     {
-
+        
     }
-    override public void Tracing()
+    public override void Hit()
     {
-
+        
+        base.Hit();
+    }
+    public override void Death()
+    {
+        
     }
 }

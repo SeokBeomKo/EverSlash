@@ -12,43 +12,26 @@ public class EnemyIdleState : EnemyState
             // false : 공격 상태로 변환
         // false : 대기 상태 유지
     // false : 추격 상태로 변환
-    public float delay;
-
+    public Enemy enemy { get; set; }
     public EnemyStateMachine stateMachine { get; set; }
 
     public void Init(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
+        this.enemy = stateMachine.enemy;
     }
-    public void Excute(NormalEnemy enemy)
+    public void Excute()
     {
-        if (enemy.enemyInfo.distance < Vector3.Distance(enemy.transform.position,enemy.target.transform.position))
-            stateMachine.ChangeState(stateMachine.traceState,enemy);
-        delay += Time.deltaTime;
-        if (delay >= enemy.enemyInfo.attackDelay)
-            stateMachine.ChangeState(stateMachine.attackState,enemy);
-        
-    }
-    public void Excute(DashEnemy enemy)
-    {
-
-    }
-    public void Excute(SmashEnemy enemy)
-    {
-
-    }
-    public void Excute(BombEnemy enemy)
-    {
-        
+        enemy.Idle();
     }
 
-    public void StateEnter(Enemy enemy)
+    public void StateEnter()
     {
+        enemy.enemyInfo.attackDelay = enemy.enemyData.enemyInfo.attackDelay;
         enemy.enemyAnim.SetBool("isIdle",true);
     }
-    public void StateExit(Enemy enemy)
+    public void StateExit()
     {
-        delay = 0;
         enemy.enemyAnim.SetBool("isIdle",false);
     }
 }

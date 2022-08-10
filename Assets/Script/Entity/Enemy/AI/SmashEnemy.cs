@@ -21,11 +21,6 @@ public class SmashEnemy : Enemy
     {
         
     }
-    public override void Hit()
-    {
-        
-        base.Hit();
-    }
     public override void Death()
     {
         

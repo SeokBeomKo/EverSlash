@@ -19,11 +19,11 @@ public class EnemyAttackState : EnemyState
         enemy.Attack();
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
         enemy.enemyAnim.SetTrigger("isAttack");
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         enemy.enemyAnim.ResetTrigger("isAttack");
     }

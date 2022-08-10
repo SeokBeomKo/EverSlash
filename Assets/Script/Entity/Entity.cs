@@ -20,5 +20,5 @@ abstract public class Entity : MonoBehaviour, IDamageable
     public int ignore;                  // 방어력 관통
     public int defence;                 // 방어력
     public EntityMaterial material;     // 메테리얼
-    public abstract IEnumerator OnDamage(int damage);
+    public abstract IEnumerator OnDamage(int _damage, int _ignore);
 }

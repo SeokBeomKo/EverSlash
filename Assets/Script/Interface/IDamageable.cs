@@ -4,5 +4,5 @@ using UnityEngine;
 
 interface IDamageable
 {
-    public IEnumerator OnDamage(int damage);
+    public IEnumerator OnDamage(int _damage, int _ignore);
 }

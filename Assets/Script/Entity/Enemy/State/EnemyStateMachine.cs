@@ -15,7 +15,7 @@ public class EnemyStateMachine : MonoBehaviour
         stateDic.Add("AttackState" , new EnemyAttackState());
         stateDic.Add("SkillState"  , new EnemySkillState() );
         stateDic.Add("HitState"    , new EnemyHitState()   );
-        stateDic.Add("DethState"   , new EnemyDeathState() );
+        stateDic.Add("DeathState"   , new EnemyDeathState() );
 
         foreach(EnemyState Value in stateDic.Values)
         {
@@ -26,12 +26,12 @@ public class EnemyStateMachine : MonoBehaviour
     public void StartState()
     {
         stateDic.TryGetValue("TraceState", out curEnemyState);
-        curEnemyState.StateEnter();
+        curEnemyState.OnStateEnter();
     }
     public void ChangeState(EnemyState state)
     {
-        curEnemyState.StateExit();
+        curEnemyState.OnStateExit();
         curEnemyState = state;
-        curEnemyState.StateEnter();
+        curEnemyState.OnStateEnter();
     }
 }

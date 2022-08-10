@@ -197,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnAttackCollision(){
-        attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage);
+        attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage,0);
         attackCollision.gameObject.SetActive(true);
     }
 

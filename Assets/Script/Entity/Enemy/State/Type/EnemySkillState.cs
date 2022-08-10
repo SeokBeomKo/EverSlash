@@ -19,11 +19,11 @@ public class EnemySkillState : EnemyState
         enemy.Skill();
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
         enemy.enemyAnim.SetTrigger("isSkill");
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         enemy.enemyAnim.ResetTrigger("isSkill");
     }

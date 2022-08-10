@@ -9,6 +9,6 @@ public interface EnemyState
     public void Init(EnemyStateMachine stateMachine);
     public void Excute();
 
-    public void StateEnter();
-    public void StateExit();
+    public void OnStateEnter();
+    public void OnStateExit();
 }

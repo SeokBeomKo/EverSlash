@@ -25,12 +25,12 @@ public class EnemyIdleState : EnemyState
         enemy.Idle();
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
         enemy.enemyInfo.attackDelay = enemy.enemyData.enemyInfo.attackDelay;
         enemy.enemyAnim.SetBool("isIdle",true);
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         enemy.enemyAnim.SetBool("isIdle",false);
     }

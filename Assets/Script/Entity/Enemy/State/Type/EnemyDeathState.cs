@@ -19,11 +19,11 @@ public class EnemyDeathState : EnemyState
 
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
-        // TODO : 파편 휘날리기
+        enemy.Death();
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         
     }

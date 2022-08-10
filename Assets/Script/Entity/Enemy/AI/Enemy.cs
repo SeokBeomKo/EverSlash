@@ -66,31 +66,57 @@ abstract public class Enemy : Entity, IDropExp
         stateMachine.curEnemyState.Excute();
     }
 
-    abstract public void Attack();          // 공격 행동
-    abstract public void Death();           // 
-    abstract public void Idle();            //
-    abstract public void Skill();           //
-    abstract public void Trace();           //
-    virtual public void Hit()
+    abstract public void Attack();                      // 공격 행동
+    abstract public void Idle();                        // 대기 행동
+    abstract public void Skill();                       // 스킬 행동
+    abstract public void Trace();                       // 추격 행동
+    virtual public void Hit()                           // 피격 행동
     {
-        if (stateMachine)
-        StartCoroutine(OnDamage(2));
+        // 피격 애니메이션 재생 끝났을 시 대기 상태로 변환
+        if (enemyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+        }
     }
-
-    public override IEnumerator OnDamage(int damage)
+    virtual public void Death()                         // 사망 행동
     {
+        enemyObj.SetActive(false);
+        enemyDbris.SetActive(true);
+        
+    }                        
+
+    public override IEnumerator OnDamage(int _damage, int _ignore)
+    {
+        // 피격 데미지 처리
+        int damage = _damage - (defence - ignore);
+        curHp -= damage;
+
+        // 사망 처리
+        if (0 >= curHp)
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["DeathState"]);
+        }
+
+        // 스킬 행동 아닐 경우 애니메이션 재생 처리
+        else if (stateMachine.curEnemyState != stateMachine.stateDic["SkillState"])
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["HitState"]);
+        }
+
         material.meshRenderer.material.SetColor("_BaseColor",       Color.red);
         material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
         material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.red);
 
         yield return new WaitForSeconds(0.1f);
 
-        if (curHp > 0){
+        if (curHp >= 0)
+        {
             material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
             material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
             material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
         }
-        else{
+        else
+        {
             material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
             material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
             material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
@@ -107,7 +133,9 @@ abstract public class Enemy : Entity, IDropExp
     {
         if (other.tag == "PlayerAttack")
         {
-            Hit();
+            var temp = other.GetComponent<AttackCollider>();
+            // 피격 이펙트 처리
+            StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
         }
     }
 }

@@ -19,26 +19,17 @@ public class EnemyHitState : EnemyState
         this.enemy = stateMachine.enemy;
     }
 
-    public WaitForSeconds wait = new WaitForSeconds(0.2f);
     public void Excute()
     {
-
+        enemy.Hit();
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
         enemy.enemyAnim.SetTrigger("isHit");
-
-        enemy.material.meshRenderer.material.SetColor("_BaseColor",       Color.red);
-        enemy.material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
-        enemy.material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.red);
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         enemy.enemyAnim.ResetTrigger("isHit");
-
-        enemy.material.meshRenderer.material.SetColor("_BaseColor",       enemy.material.origin_1);
-        enemy.material.meshRenderer.material.SetColor("_1st_ShadeColor",  enemy.material.origin_2);
-        enemy.material.meshRenderer.material.SetColor("_2nd_ShadeColor",  enemy.material.origin_3);
     }
 }

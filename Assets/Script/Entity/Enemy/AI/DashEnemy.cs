@@ -21,10 +21,6 @@ public class DashEnemy : Enemy
     {
         
     }
-    public override void Hit()
-    {
-        
-    }
     public override void Death()
     {
         

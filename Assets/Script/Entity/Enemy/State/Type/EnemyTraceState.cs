@@ -21,11 +21,11 @@ public class EnemyTraceState : EnemyState
         enemy.Trace();
     }
 
-    public void StateEnter()
+    public void OnStateEnter()
     {
         enemy.enemyAnim.SetBool("isTrace",true);
     }
-    public void StateExit()
+    public void OnStateExit()
     {
         enemy.enemyAnim.SetBool("isTrace",false);
     }

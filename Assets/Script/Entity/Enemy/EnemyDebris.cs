@@ -13,7 +13,8 @@ public class EnemyDebris : MonoBehaviour
     private void Awake() {
         rigid = gameObject.GetComponentsInChildren<Rigidbody>();
         pos = new Vector3[rigid.Length];
-        for (int i = 0; i < rigid.Length; i++){
+        for (int i = 0; i < rigid.Length; i++)
+        {
             pos[i] = rigid[i].transform.localPosition;
             rigid[i].velocity = Vector3.zero;
         }
@@ -23,23 +24,23 @@ public class EnemyDebris : MonoBehaviour
     }
 
     private void OnDisable() {
-        for (int i = 0; i < rigid.Length; i++){
+        for (int i = 0; i < rigid.Length; i++)
+        {
             rigid[i].transform.localPosition = pos[i];
             rigid[i].velocity = Vector3.zero;
         }
         ObjectPooler.ReturnToPool(gameObject);
     }
     public void Explosion(Vector3 reactVec){
-        for (int i = 0; i < rigid.Length; i++){
+        for (int i = 0; i < rigid.Length; i++)
+        {
             //rigid[i].velocity = Vector3.zero;
             rigid[i].AddExplosionForce(m_force,transform.position - reactVec.normalized, 10f);
         }
-        StartCoroutine(Disable(1f));
+        StartCoroutine(Disable());
     }
-    IEnumerator Disable(float time){
-        yield return new WaitForSeconds(time);
-        for (int i = 0; i < rigid.Length; i++){
-        }
+    IEnumerator Disable(){
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
 

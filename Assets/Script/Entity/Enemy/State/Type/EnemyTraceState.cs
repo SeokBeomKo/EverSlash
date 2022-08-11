@@ -24,9 +24,12 @@ public class EnemyTraceState : EnemyState
     public void OnStateEnter()
     {
         enemy.enemyAnim.SetBool("isTrace",true);
+        enemy.nav.isStopped = false;
     }
     public void OnStateExit()
     {
         enemy.enemyAnim.SetBool("isTrace",false);
+        enemy.nav.isStopped = true;
+        enemy.nav.velocity = Vector3.zero;
     }
 }

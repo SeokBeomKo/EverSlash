@@ -9,8 +9,7 @@ public class EnemyDataEditor : Editor
     EnemyData data;
 
     SerializedProperty enemyInfo; SerializedProperty normalInfo; SerializedProperty dashInfo;
-    SerializedProperty bombInfo; SerializedProperty smashInfo; SerializedProperty areaInfo;
-    SerializedProperty shootInfo;
+    SerializedProperty bombInfo; SerializedProperty smashInfo;
     
     public void OnEnable() {
         {
@@ -47,6 +46,6 @@ public class EnemyDataEditor : Editor
                 break;
         }
 
-        EditorUtility.SetDirty(data);
+        serializedObject.ApplyModifiedProperties ();
     }
 }

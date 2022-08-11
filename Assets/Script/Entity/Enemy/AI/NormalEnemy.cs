@@ -11,7 +11,7 @@ public class NormalEnemy : Enemy
         nav.SetDestination(target.position);
 
         // 플레이어가 공격범위 내에 있는가?
-        if (enemyInfo.distance >= Vector3.Distance(transform.position,target.transform.position))
+        if (enemyData.enemyInfo.distance >= Vector3.Distance(transform.position,target.transform.position))
         {
             // 있다면 대기 상태로 변경
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
@@ -22,26 +22,35 @@ public class NormalEnemy : Enemy
     public override void Idle()
     {
         // 플레이어가 공격 인식 범위에서 벗어났을 경우 추격상태로 변환
-        if (enemyInfo.distance < Vector3.Distance(transform.position,target.transform.position))
+        if (enemyData.enemyInfo.distance < Vector3.Distance(transform.position,target.transform.position))
         {
             stateMachine.ChangeState(stateMachine.stateDic["TraceState"]);
         }
         // 플레이어가 공격 인식 범위 내에 있고 공격 딜레이가 충족되었을 경우 공격상태로 변환
-        if (enemyInfo.attackDelay <= enemyData.enemyInfo.attackDelay)
+        if (attackDelay >= enemyData.enemyInfo.attackDelay)
         {
             stateMachine.ChangeState(stateMachine.stateDic["AttackState"]);
         }
 
-        enemyInfo.attackDelay -= Time.deltaTime;
+        attackDelay += Time.fixedDeltaTime;
     }
     public override void Attack()
     {
+        if (enemyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+        }
+    }
+
+    public void OnAttack()
+    {
+        Debug.Log("골렘 공격");
         RaycastHit rayHits;
         if (Physics.SphereCast(transform.position, 
-                            enemyInfo.range,
+                            enemyData.enemyInfo.range,
                             transform.forward,
                             out rayHits,
-                            enemyInfo.range * 0.5f,
+                            enemyData.enemyInfo.range * 0.5f,
                             LayerMask.GetMask("Player")))
         {
             int attack = Random.Range(attackMin,attackMax);

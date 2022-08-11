@@ -8,7 +8,7 @@ public class EnemyStateMachine : MonoBehaviour
     public EnemyState curEnemyState;
     public Dictionary<string, EnemyState> stateDic = new Dictionary<string, EnemyState>();
 
-    private void Start()
+    private void Awake()
     {
         stateDic.Add("TraceState"  , new EnemyTraceState() );
         stateDic.Add("IdleState"   , new EnemyIdleState()  );
@@ -23,8 +23,9 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    public void StartState()
+    public IEnumerator StartState()
     {
+        yield return new WaitForSeconds(0.1f);
         stateDic.TryGetValue("TraceState", out curEnemyState);
         curEnemyState.OnStateEnter();
     }

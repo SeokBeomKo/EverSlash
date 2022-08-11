@@ -100,7 +100,8 @@ public class EnemyAI : MonoBehaviour
         anim.OnTrace(true);
     }
     private void Move(){
-        if (nav.enabled){
+        if (nav.enabled)
+        {
             if (target != null)
                 nav.SetDestination(target.position);
             nav.isStopped = (!isTrace || isAttack);

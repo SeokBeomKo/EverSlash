@@ -21,10 +21,12 @@ public class EnemyAttackState : EnemyState
 
     public void OnStateEnter()
     {
-        enemy.enemyAnim.SetTrigger("isAttack");
+        enemy.transform.LookAt(enemy.target);
+        enemy.enemyAnim.SetBool("isAttack",true);
     }
     public void OnStateExit()
     {
-        enemy.enemyAnim.ResetTrigger("isAttack");
+        enemy.attackDelay = 0;
+        enemy.enemyAnim.SetBool("isAttack",false);
     }
 }

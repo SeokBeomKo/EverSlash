@@ -6,15 +6,14 @@ using UnityEngine.AI;
 abstract public class Enemy : Entity, IDropExp
 {
     [SerializeField] public EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
-
-    [SerializeField] public EnemyInfo           enemyInfo;          // 적 공통 데이터
     [SerializeField] public Animator            enemyAnim;          // 적 애니메이터
     [SerializeField] public Transform           target;             // 추적 대상
     [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬
-    [SerializeField] public SphereCollider      attackRange;        // 공격 인식 범위
 
     [SerializeField] public GameObject          enemyObj;           // 적 
     [SerializeField] public GameObject          enemyDbris;         // 적 파편
+
+    public float attackDelay;
 
     public EnemyStateMachine stateMachine; 
       
@@ -31,13 +30,12 @@ abstract public class Enemy : Entity, IDropExp
         material.origin_3       = material.meshRenderer.material.GetColor("_2nd_ShadeColor");
 
         // 적 공통 데이터 적용
-        enemyInfo = enemyData.enemyInfo;
+        // enemyInfo = enemyData.enemyInfo;
+        attackDelay = enemyData.enemyInfo.attackDelay;
 
         // 적 이동 속도 설정
-        nav.speed = enemyInfo.moveSpeed;
-
-        // 상태패턴기계 설정
-        stateMachine.enemy = this;
+        nav.speed = enemyData.enemyInfo.moveSpeed;
+        nav.acceleration = enemyData.enemyInfo.moveSpeed * 10f;
 
         // 추적 대상 설정
         StartCoroutine(Set());
@@ -51,8 +49,8 @@ abstract public class Enemy : Entity, IDropExp
     // 오브젝트 풀링 시작시 설정
     private void OnEnable()
     {
-        stateMachine.StartState();
-        curHp = maxHp;
+        StartCoroutine(stateMachine.StartState());
+        curHp = enemyData.enemyInfo.hp;
     }
 
     // 죽었을 시 오브젝트 풀링 리턴
@@ -63,7 +61,8 @@ abstract public class Enemy : Entity, IDropExp
 
     private void FixedUpdate() 
     {
-        stateMachine.curEnemyState.Excute();
+        if (null != stateMachine.curEnemyState)
+            stateMachine.curEnemyState.Excute();
     }
 
     abstract public void Attack();                      // 공격 행동
@@ -131,11 +130,12 @@ abstract public class Enemy : Entity, IDropExp
 
     private void OnTriggerEnter(Collider other) 
     {
-        if (other.tag == "PlayerAttack")
+        if (other.CompareTag("PlayerAttack"))
         {
             var temp = other.GetComponent<AttackCollider>();
             // 피격 이펙트 처리
-            StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
+            StartCoroutine(OnDamage(10,0));
+            //StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
         }
     }
 }

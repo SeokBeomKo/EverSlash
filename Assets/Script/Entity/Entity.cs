@@ -11,7 +11,6 @@ public struct EntityMaterial
 }
 abstract public class Entity : MonoBehaviour, IDamageable
 {
-    public int maxHp;                   // 최대 체력
     public int curHp;                   // 현재 체력
     public float moveSpeed;             // 이동 속도
     public float attackSpeed;           // 공격 속도

@@ -153,7 +153,7 @@ public class EnemyAI : MonoBehaviour
             // Destroy(gameObject, 3);
             isAttack = false;
             GameObject debris = ObjectPooler.SpawnFromPool(debrisName,transform.position);
-            debris.GetComponent<EnemyDebris>().Explosion(reactVec);
+            //debris.GetComponent<EnemyDebris>().Explosion(reactVec);
             
             gameObject.SetActive(false);
         }

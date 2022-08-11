@@ -44,7 +44,6 @@ public class NormalEnemy : Enemy
 
     public void OnAttack()
     {
-        Debug.Log("골렘 공격");
         RaycastHit rayHits;
         if (Physics.SphereCast(transform.position, 
                             enemyData.enemyInfo.range,
@@ -53,35 +52,7 @@ public class NormalEnemy : Enemy
                             enemyData.enemyInfo.range * 0.5f,
                             LayerMask.GetMask("Player")))
         {
-            int attack = Random.Range(attackMin,attackMax);
-            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(attack));
+            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.enemyInfo.attack,enemyData.enemyInfo.ignore));
         }
     }
-    public override void Skill()
-    {
-        
-    }
-    public override void Death()
-    {
-        
-    }
-
-    // override public void AttackCheck()
-    // {
-    //     if (enemyInfo.distance >= Vector3.Distance(target.transform.position,transform.position))
-    //     {
-    //         enemyState = _EnemyState.Attack;
-    //     }
-    //     else
-    //     {
-    //         enemyState = _EnemyState.Trace;
-    //     }
-    // }
-    // override public void Tracing()
-    // {
-    //     if (enemyState == _EnemyState.Trace){
-    //         if (target != null)
-    //             nav.SetDestination(target.position);
-    //     }
-    // }
 }

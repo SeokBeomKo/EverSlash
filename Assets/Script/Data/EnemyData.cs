@@ -9,7 +9,7 @@ public enum EnemyType
     Normal,     // 일반형 몬스터
     Dash,       // 돌진형 몬스터
     Bomb,       // 자폭형 몬스터
-    Smash       // 강공형 몬스터
+    Smash       // 강공형 몬스터 ( 방어력 무시 )
 }
 
 [Serializable] public struct EnemyInfo
@@ -17,8 +17,8 @@ public enum EnemyType
     public string name;         // 이름
     public float moveSpeed;     // 이동 속도
     public int hp;              // 체력
-    public float distance;      // 공격 인식범위
-    public float range;         // 공격 범위
+    public float distance;      // 공격 인식범위   (공격 시작)
+    public float range;         // 공격 범위       (실제 데미지유효 거리)
     public int attack;          // 공격력
     public float attackDelay;   // 공격 딜레이
     public int ignore;          // 방어 관통
@@ -32,7 +32,9 @@ public enum EnemyType
 
 [Serializable] public struct DashInfo
 {
-    public int temp;
+    public int skillMinDistance;
+    public int skillMaxDistance;
+    public int skillDuration;
 }
 
 [Serializable] public struct BombInfo
@@ -42,7 +44,9 @@ public enum EnemyType
 
 [Serializable] public struct SmashInfo
 {
-    public int temp;
+    public int skillCondition;      // 스킬 까지 남은 공격 횟수
+    public int skillRange;          // 스킬 범위       (실제 데미지유효 거리)
+    public int skillAttack;         // 스킬 공격력
 }
 
 

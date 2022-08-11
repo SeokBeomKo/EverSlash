@@ -25,6 +25,7 @@ public class EnemySkillState : EnemyState
     }
     public void OnStateExit()
     {
+        enemy.attackDelay = 0;
         enemy.enemyAnim.ResetTrigger("isSkill");
     }
 }

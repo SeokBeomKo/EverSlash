@@ -11,7 +11,7 @@ abstract public class Enemy : Entity, IDropExp
     [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬
 
     [SerializeField] public GameObject          enemyObj;           // 적 
-    [SerializeField] public GameObject          enemyDbris;         // 적 파편
+    [SerializeField] public EnemyDebris         enemyDbris;         // 적 파편
 
     public float attackDelay;
 
@@ -29,13 +29,16 @@ abstract public class Enemy : Entity, IDropExp
         material.origin_2       = material.meshRenderer.material.GetColor("_1st_ShadeColor");
         material.origin_3       = material.meshRenderer.material.GetColor("_2nd_ShadeColor");
 
-        // 적 공통 데이터 적용
+        // 적 유동 데이터 적용
         // enemyInfo = enemyData.enemyInfo;
         attackDelay = enemyData.enemyInfo.attackDelay;
 
         // 적 이동 속도 설정
         nav.speed = enemyData.enemyInfo.moveSpeed;
         nav.acceleration = enemyData.enemyInfo.moveSpeed * 10f;
+
+        // 적 파편 설정
+        enemyDbris.enemyObj = enemyObj;
 
         // 추적 대상 설정
         StartCoroutine(Set());
@@ -67,8 +70,8 @@ abstract public class Enemy : Entity, IDropExp
 
     abstract public void Attack();                      // 공격 행동
     abstract public void Idle();                        // 대기 행동
-    abstract public void Skill();                       // 스킬 행동
     abstract public void Trace();                       // 추격 행동
+    virtual public void Skill(){}                       // 스킬 행동
     virtual public void Hit()                           // 피격 행동
     {
         // 피격 애니메이션 재생 끝났을 시 대기 상태로 변환
@@ -80,14 +83,15 @@ abstract public class Enemy : Entity, IDropExp
     virtual public void Death()                         // 사망 행동
     {
         enemyObj.SetActive(false);
-        enemyDbris.SetActive(true);
-        
+
+        enemyDbris.reactVec = transform.position - target.position;
+        enemyDbris.gameObject.SetActive(true);
     }                        
 
     public override IEnumerator OnDamage(int _damage, int _ignore)
     {
         // 피격 데미지 처리
-        int damage = _damage - (defence - ignore);
+        int damage = _damage - (defence - _ignore);
         curHp -= damage;
 
         // 사망 처리
@@ -108,24 +112,10 @@ abstract public class Enemy : Entity, IDropExp
 
         yield return new WaitForSeconds(0.1f);
 
-        if (curHp >= 0)
-        {
-            material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
-            material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
-            material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
-        }
-        else
-        {
-            material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
-            material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
-            material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
+        material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
+        material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
+        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
 
-            // 몬스터 사망 시 파편작업
-            //GameObject debris = ObjectPooler.SpawnFromPool(debrisName,transform.position);
-            //debris.GetComponent<EnemyDebris>().Explosion(reactVec);
-            
-            gameObject.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter(Collider other) 

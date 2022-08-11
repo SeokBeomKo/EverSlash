@@ -213,8 +213,9 @@ public class PlayerMovement : MonoBehaviour
         slashes[code].gameObject.SetActive(false);
     }
 
-    public IEnumerator OnDamage(int damage){
-        TakeDamage(damage);
+    public IEnumerator OnDamage(int _damage, int _ignore)
+    {
+        TakeDamage(_damage, _ignore);
         for (int i = 0; i < meshRenderer.Length; i++){
             meshRenderer[i].material.SetColor("_BaseColor",Color.red);
             meshRenderer[i].material.SetColor("_1st_ShadeColor",Color.red);
@@ -238,12 +239,12 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
     }
-    private void TakeDamage(int _damage){
-        int damage = _damage - defence;
+    private void TakeDamage(int _damage, int _ignore){
+        int damage = _damage - (defence - _ignore);
 
         if (0 >= damage)
         {
-            return;
+            hpSlider.SetHP(curHealth);
         }
         else
         {

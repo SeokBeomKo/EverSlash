@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyDebris : MonoBehaviour
 {
-    [SerializeField] GameObject Prefabs = null;
-    [SerializeField] float m_force;
-    [SerializeField] Vector3 m_offset = Vector3.zero;
+    [SerializeField] public GameObject enemyObj;
+    [SerializeField] public float m_force;
+    [SerializeField] public Vector3 reactVec;
     Rigidbody[] rigid;
     Vector3[] pos;
 
@@ -21,6 +21,12 @@ public class EnemyDebris : MonoBehaviour
     }
     private void OnEnable()
     {
+        for (int i = 0; i < rigid.Length; i++)
+        {
+            //rigid[i].velocity = Vector3.zero;
+            rigid[i].AddExplosionForce(m_force,transform.position - reactVec.normalized, 10f);
+        }
+        StartCoroutine(Disable());
     }
 
     private void OnDisable() {
@@ -29,19 +35,13 @@ public class EnemyDebris : MonoBehaviour
             rigid[i].transform.localPosition = pos[i];
             rigid[i].velocity = Vector3.zero;
         }
-        ObjectPooler.ReturnToPool(gameObject);
     }
-    public void Explosion(Vector3 reactVec){
-        for (int i = 0; i < rigid.Length; i++)
-        {
-            //rigid[i].velocity = Vector3.zero;
-            rigid[i].AddExplosionForce(m_force,transform.position - reactVec.normalized, 10f);
-        }
-        StartCoroutine(Disable());
-    }
+
     IEnumerator Disable(){
         yield return new WaitForSeconds(1f);
+        enemyObj.SetActive(true);
         gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 
 }

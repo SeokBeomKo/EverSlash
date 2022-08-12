@@ -21,11 +21,11 @@ public class EnemySkillState : EnemyState
 
     public void OnStateEnter()
     {
-        enemy.enemyAnim.SetTrigger("isSkill");
+        enemy.enemyAnim.SetBool("isSkill",true);
     }
     public void OnStateExit()
     {
         enemy.attackDelay = 0;
-        enemy.enemyAnim.ResetTrigger("isSkill");
+        enemy.enemyAnim.SetBool("isSkill",false);
     }
 }

@@ -50,7 +50,7 @@ abstract public class Enemy : Entity, IDropExp
     }
 
     // 오브젝트 풀링 시작시 설정
-    private void OnEnable()
+    virtual public void OnEnable()
     {
         StartCoroutine(stateMachine.StartState());
         curHp = enemyData.enemyInfo.hp;
@@ -80,7 +80,7 @@ abstract public class Enemy : Entity, IDropExp
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
         }
     }
-    virtual public void Death()                         // 사망 행동
+    public virtual void Death()                         // 사망 행동
     {
         enemyObj.SetActive(false);
 

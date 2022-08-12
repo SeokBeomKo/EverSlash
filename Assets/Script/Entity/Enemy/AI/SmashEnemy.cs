@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SmashEnemy : Enemy
 {
-    public SmashInfo smashInfo;
     public int skillCondition;
 
-    private void OnEnable() 
+    public override void OnEnable() 
     {
+        StartCoroutine(stateMachine.StartState());
+        curHp = enemyData.enemyInfo.hp;
+        
         skillCondition = 0;
     }
     public override void Trace()

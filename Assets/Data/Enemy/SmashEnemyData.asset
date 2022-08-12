@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c51aefff8ede8b3458f6a530c97ce44a, type: 3}
-  m_Name: EnemyData
+  m_Name: SmashEnemyData
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 3
   enemyInfo:
     name: 
     moveSpeed: 5
@@ -25,8 +25,12 @@ MonoBehaviour:
     defence: 0
     exp: 0
   dashInfo:
-    temp: 0
+    skillMinDistance: 0
+    skillMaxDistance: 0
+    skillDuration: 0
   bombInfo:
     temp: 0
   smashInfo:
-    temp: 0
+    skillCondition: 1
+    skillRange: 10
+    skillAttack: 20

@@ -106,9 +106,9 @@ abstract public class Enemy : Entity, IDropExp
             stateMachine.ChangeState(stateMachine.stateDic["HitState"]);
         }
 
-        material.meshRenderer.material.SetColor("_BaseColor",       Color.red);
-        material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.red);
-        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.red);
+        material.meshRenderer.material.SetColor("_BaseColor",       Color.white);
+        material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.white);
+        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.white);
 
         yield return new WaitForSeconds(0.1f);
 

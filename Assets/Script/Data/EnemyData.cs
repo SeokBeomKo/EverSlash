@@ -39,7 +39,9 @@ public enum EnemyType
 
 [Serializable] public struct BombInfo
 {   
-    public int temp;
+    public float skillTime;         // 스킬 대기시간
+    public int skillRange;          // 스킬 범위       (실제 데미지유효 거리)
+    public int skillAttack;         // 스킬 공격력
 }
 
 [Serializable] public struct SmashInfo

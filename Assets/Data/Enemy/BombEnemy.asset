@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c51aefff8ede8b3458f6a530c97ce44a, type: 3}
-  m_Name: NormalEnemyData
+  m_Name: BombEnemy
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 2
   enemyInfo:
     name: 
-    moveSpeed: 5
+    moveSpeed: 10
     hp: 50
-    distance: 5
+    distance: 1
     range: 5
-    attack: 10
-    attackDelay: 1
+    attack: 0
+    attackDelay: 0
     ignore: 0
     defence: 0
     exp: 0
@@ -29,7 +29,9 @@ MonoBehaviour:
     skillMaxDistance: 0
     skillDuration: 0
   bombInfo:
-    temp: 0
+    skillTime: 5
+    skillRange: 10
+    skillAttack: 20
   smashInfo:
     skillCondition: 0
     skillRange: 0

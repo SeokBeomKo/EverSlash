@@ -4,9 +4,9 @@ using UnityEngine;
 
 public struct TempMaterial
 {
-    public Color temp_m_1;
-    public Color temp_m_2;
-    public Color temp_m_3;
+    public Color temp_c_1;
+    public Color temp_c_2;
+    public Color temp_c_3;
 }
 public class BombEnemy : Enemy
 {
@@ -20,9 +20,9 @@ public class BombEnemy : Enemy
         temp_lerp = 0;
         temp_time = 0;
 
-        tempMaterial.temp_m_1 = material.origin_1;
-        tempMaterial.temp_m_2 = material.origin_2;
-        tempMaterial.temp_m_3 = material.origin_3;
+        tempMaterial.temp_c_1 = material.origin_1;
+        tempMaterial.temp_c_2 = material.origin_2;
+        tempMaterial.temp_c_3 = material.origin_3;
     }
     public override void Trace()
     {
@@ -47,32 +47,44 @@ public class BombEnemy : Enemy
     }
     public override void Skill()
     {
-        temp_time += Time.deltaTime;
-        temp_lerp = Mathf.Lerp(0,enemyData.bombInfo.skillTime,temp_time);
-        Debug.Log(temp_lerp);
+        // 지정된 쿨 동안 공격 준비
+        temp_time += Time.fixedDeltaTime / enemyData.bombInfo.skillTime;
+        temp_lerp = Mathf.Lerp(0,1,temp_time);
 
-        // tempMaterial.temp_m_1 = Color.Lerp(material.origin_1,Color.red,1);
+        // 색상 변환
+        tempMaterial.temp_c_1 = Color.Lerp(material.origin_1,Color.red,temp_lerp);
+        material.meshRenderer.material.SetColor("_BaseColor",       tempMaterial.temp_c_1);
+        material.meshRenderer.material.SetColor("_1st_ShadeColor",  tempMaterial.temp_c_1);
+        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  tempMaterial.temp_c_1);
 
-        // material.meshRenderer.material.SetColor("_BaseColor",       tempMaterial.temp_m_1);
-        // material.meshRenderer.material.SetColor("_1st_ShadeColor",  tempMaterial.temp_m_2);
-        // material.meshRenderer.material.SetColor("_2nd_ShadeColor",  tempMaterial.temp_m_3);
+        if (temp_lerp >= 0.99f)
+        {
+            material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
+            material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
+            material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
+            OnSkill();
+        }
     }
     public override void Death()
     {
-        
+        enemyObj.SetActive(false);
+
+        enemyDbris.reactVec = Vector3.zero;
+        enemyDbris.gameObject.SetActive(true);
     }
 
     public void OnSkill()
     {
         RaycastHit rayHits;
         if (Physics.SphereCast(transform.position, 
-                            enemyData.smashInfo.skillRange,
+                            enemyData.bombInfo.skillRange,
                             transform.forward,
                             out rayHits,
-                            enemyData.smashInfo.skillRange * 0.5f,
+                            enemyData.bombInfo.skillRange * 0.5f,
                             LayerMask.GetMask("Player")))
         {
-            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.smashInfo.skillAttack,rayHits.transform.GetComponent<PlayerMovement>().defence));
+            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.bombInfo.skillAttack,rayHits.transform.GetComponent<PlayerMovement>().defence));
         }
+        stateMachine.ChangeState(stateMachine.stateDic["DeathState"]);
     }
 }

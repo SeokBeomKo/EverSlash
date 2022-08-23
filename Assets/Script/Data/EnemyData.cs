@@ -32,9 +32,9 @@ public enum EnemyType
 
 [Serializable] public struct DashInfo
 {
-    public int skillMinDistance;
-    public int skillMaxDistance;
-    public int skillDuration;
+    public float skillTime;         // 스킬 대기시간
+    public int skillDistance;       // 스킬 발동 조건 거리
+    public float skillSpeed;        // 스킬 발동시 이동 속도
 }
 
 [Serializable] public struct BombInfo

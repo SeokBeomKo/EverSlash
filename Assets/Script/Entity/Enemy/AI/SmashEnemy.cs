@@ -19,7 +19,7 @@ public class SmashEnemy : Enemy
         nav.SetDestination(target.position);
 
         // 플레이어가 공격범위 내에 있는가?
-        if (enemyData.enemyInfo.distance >= Vector3.Distance(transform.position,target.transform.position))
+        if (enemyData.enemyInfo.distance >= Vector3.Distance(transform.position,target.position))
         {
             // 있다면 대기 상태로 변경
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
@@ -29,7 +29,7 @@ public class SmashEnemy : Enemy
     public override void Idle()
     {
         // 플레이어가 공격 인식 범위에서 벗어났을 경우 추격상태로 변환
-        if (enemyData.enemyInfo.distance < Vector3.Distance(transform.position,target.transform.position))
+        if (enemyData.enemyInfo.distance < Vector3.Distance(transform.position,target.position))
         {
             stateMachine.ChangeState(stateMachine.stateDic["TraceState"]);
         }

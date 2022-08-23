@@ -17,9 +17,9 @@ public class BombEnemy : Enemy
     {
         StartCoroutine(stateMachine.StartState());
         curHp = enemyData.enemyInfo.hp;
-        temp_lerp = 0;
-        temp_time = 0;
 
+        temp_time = 0;
+        temp_lerp = 0;
         tempMaterial.temp_c_1 = material.origin_1;
         tempMaterial.temp_c_2 = material.origin_2;
         tempMaterial.temp_c_3 = material.origin_3;
@@ -30,7 +30,7 @@ public class BombEnemy : Enemy
         nav.SetDestination(target.position);
 
         // 플레이어가 공격범위 내에 있는가?
-        if (enemyData.enemyInfo.distance >= Vector3.Distance(transform.position,target.transform.position))
+        if (enemyData.enemyInfo.distance >= Vector3.Distance(transform.position,target.position))
         {
             // 있다면 대기 상태로 변경
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
@@ -48,7 +48,7 @@ public class BombEnemy : Enemy
     public override void Skill()
     {
         // 지정된 쿨 동안 공격 준비
-        temp_time += Time.fixedDeltaTime / enemyData.bombInfo.skillTime;
+        temp_time += Time.fixedDeltaTime / enemyData.bombInfo.skillDelay;
         temp_lerp = Mathf.Lerp(0,1,temp_time);
 
         // 색상 변환

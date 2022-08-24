@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17684779, g: 0.22137184, b: 0.30366078, a: 1}
+  m_IndirectSpecularColor: {r: 0.17684793, g: 0.22137213, b: 0.3036613, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1082,13 +1082,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 719253081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1330fc4995b36a54e998bbff9ee4bf53, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1a5ae68f96f6b4898f025a7c228e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curHp: 0
   moveSpeed: 0
   defence: 0
-  enemyData: {fileID: 11400000, guid: dc3db4ccc54894645b01487ba58344dc, type: 2}
+  enemyData: {fileID: 11400000, guid: d423487f6bcc2194b9e95530af1ea1a8, type: 2}
   enemyAnim: {fileID: 0}
   target: {fileID: 1124231788}
   nav: {fileID: 0}
@@ -1096,8 +1096,12 @@ MonoBehaviour:
   enemyDbris: {fileID: 1716560797}
   attackDelay: 0
   stateMachine: {fileID: 719253082}
-  temp_lerp: 0
-  temp_time: 0
+  dashInfo:
+    skillDelay: 0
+    skillDistance: 0
+    skillSpeed: 0
+  temp_skillDelay: 0
+  temp_target: {x: 0, y: 0, z: 0}
 --- !u!195 &719253084
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1146,7 +1150,7 @@ Animator:
   m_GameObject: {fileID: 719253081}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0f2c5202b918687408ac5bc7429a03ea, type: 3}
-  m_Controller: {fileID: 9100000, guid: 676a8c8721f51b248af9b6a3e9ec4dc9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 135a9299a828c4d4ca00b6cd4cbaaa52, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4759,6 +4763,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[B]Golem'
       objectReference: {fileID: 0}
+    - target: {fileID: 5627965768903490844, guid: eecc3fec71b8a0d4990c76de822244ef, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5be9968551453014d99ac7b4351978f6, type: 2}
     - target: {fileID: 5627965768903490845, guid: eecc3fec71b8a0d4990c76de822244ef, type: 3}
       propertyPath: m_RootOrder
       value: 9

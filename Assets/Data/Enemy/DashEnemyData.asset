@@ -25,11 +25,11 @@ MonoBehaviour:
     defence: 0
     exp: 0
   dashInfo:
-    skillTime: 0
-    skillDistance: 0
-    skillSpeed: 0
+    skillDelay: 5
+    skillDistance: 20
+    skillSpeed: 20
   bombInfo:
-    skillTime: 0
+    skillDelay: 0
     skillRange: 0
     skillAttack: 0
   smashInfo:

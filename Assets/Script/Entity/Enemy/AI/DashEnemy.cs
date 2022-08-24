@@ -5,7 +5,8 @@ using UnityEngine;
 public class DashEnemy : Enemy
 {
     public DashInfo dashInfo;
-    private Vector3 temp_target;
+    private Vector3 temp_Direction;    // 스킬 사용 방향
+    private Vector3 temp_Position;       // 스킬 사용 시작 시 포지션
     private float temp_skillDelay;
     public override void OnEnable() 
     {
@@ -25,7 +26,8 @@ public class DashEnemy : Enemy
         {
             // 맞다면 스킬 사용
             temp_skillDelay = 0f;
-            temp_target = target.position;
+            temp_Direction = target.position - transform.position;
+            temp_Position = transform.position;
             stateMachine.ChangeState(stateMachine.stateDic["SkillState"]);
         }
 
@@ -45,7 +47,8 @@ public class DashEnemy : Enemy
         {
             // 맞다면 스킬 사용
             temp_skillDelay = 0f;
-            temp_target = target.position;
+            temp_Direction = target.position - transform.position;
+            temp_Position = transform.position;
             stateMachine.ChangeState(stateMachine.stateDic["SkillState"]);
         }
 
@@ -73,10 +76,16 @@ public class DashEnemy : Enemy
     public override void Skill()
     {
         // TODO : 스킬 사용 돌진 중 충돌체? 무엇으로할지
-        
-        // 돌진 스킬 사용 후 목표 지점에 도달했을 경우 대기상태로 변환
-        if (temp_target == transform.position)
+        nav.isStopped = false;
+        nav.SetDestination(transform.position + temp_Direction);
+        nav.speed = enemyData.dashInfo.skillSpeed;
+
+        // 돌진 스킬 사용 후 일정 거리에 도달했을 경우 대기상태로 변환
+        if (enemyData.dashInfo.skillDistance <= Vector3.Distance(transform.position,temp_Position))
         {
+            nav.isStopped = true;
+            nav.speed = enemyData.enemyInfo.moveSpeed;
+
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
         }
     }

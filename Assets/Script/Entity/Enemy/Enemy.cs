@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 abstract public class Enemy : Entity, IDropExp
 {
-    [SerializeField] public EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
+    [SerializeField] public EnemyData          enemyData;           // 적 타입에 따른 데이터 스크립터블오브젝트
     [SerializeField] public Animator            enemyAnim;          // 적 애니메이터
     [SerializeField] public Transform           target;             // 추적 대상
     [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬

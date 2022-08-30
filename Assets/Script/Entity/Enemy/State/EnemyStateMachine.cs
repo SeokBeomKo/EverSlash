@@ -15,7 +15,7 @@ public class EnemyStateMachine : MonoBehaviour
         stateDic.Add("AttackState" , new EnemyAttackState());
         stateDic.Add("SkillState"  , new EnemySkillState() );
         stateDic.Add("HitState"    , new EnemyHitState()   );
-        stateDic.Add("DeathState"   , new EnemyDeathState() );
+        stateDic.Add("DeathState"  , new EnemyDeathState() );
 
         foreach(EnemyState Value in stateDic.Values)
         {

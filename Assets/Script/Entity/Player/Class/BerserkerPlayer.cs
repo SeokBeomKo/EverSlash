@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class BerserkerPlayer : Player
 {
+    public override void AttackDelay()
+    {
+        
+    }
     public override void Attack()
     {
-        if (true)
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
         {
+            stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
         }
     }
     public override void Idle()
     {
+        if (Input.GetButton("Fire1"))
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["AttackState"]);
+        }
         if (0 != Input.GetAxis("Horizontal") || 0 != Input.GetAxis("Vertical"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["MoveState"]);
@@ -40,6 +49,6 @@ public class BerserkerPlayer : Player
     }
     public override void Skill()
     {
-        
+        // TODO : 스킬 시스템
     }
 }

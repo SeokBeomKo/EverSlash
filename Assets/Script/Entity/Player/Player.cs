@@ -36,6 +36,7 @@ abstract public class Player : Entity
             stateMachine.curPlayerState.Excute();
     }
 
+    abstract public void AttackDelay();         // 공격 준비 행동
     abstract public void Attack();              // 공격 행동
     virtual  public void Death()                // 사망 행동
     {

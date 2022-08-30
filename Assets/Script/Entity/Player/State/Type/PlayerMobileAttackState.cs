@@ -18,6 +18,8 @@ public class PlayerMobileAttackState : PlayerState
 
     public void OnStateEnter()
     {
+        player.playerAnim.SetBool("isMove",true);
+        player.playerAnim.SetTrigger("isAttack");
     }
     public void OnStateExit()
     {

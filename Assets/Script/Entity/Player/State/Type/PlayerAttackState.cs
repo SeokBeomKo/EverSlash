@@ -14,13 +14,15 @@ public class PlayerAttackState : PlayerState
     }
     public void Excute()
     {
+        player.Attack();
     }
 
     public void OnStateEnter()
     {
-        
+        player.playerAnim.SetTrigger("isAttack");
     }
     public void OnStateExit()
     {
+        player.playerAnim.ResetTrigger("isAttack");
     }
 }

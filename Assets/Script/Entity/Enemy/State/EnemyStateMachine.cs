@@ -10,12 +10,12 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        stateDic.Add("TraceState"  , new EnemyTraceState() );
-        stateDic.Add("IdleState"   , new EnemyIdleState()  );
         stateDic.Add("AttackState" , new EnemyAttackState());
-        stateDic.Add("SkillState"  , new EnemySkillState() );
-        stateDic.Add("HitState"    , new EnemyHitState()   );
         stateDic.Add("DeathState"  , new EnemyDeathState() );
+        stateDic.Add("HitState"    , new EnemyHitState()   );
+        stateDic.Add("IdleState"   , new EnemyIdleState()  );
+        stateDic.Add("SkillState"  , new EnemySkillState() );
+        stateDic.Add("TraceState"  , new EnemyTraceState() );
 
         foreach(EnemyState Value in stateDic.Values)
         {

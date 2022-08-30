@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerState
+public class PlayerAttackDelayState : PlayerState
 {
     public Player player { get; set; }
     public PlayerStateMachine stateMachine { get; set; }

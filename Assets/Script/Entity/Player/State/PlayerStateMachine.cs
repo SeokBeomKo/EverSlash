@@ -8,6 +8,29 @@ public class PlayerStateMachine : MonoBehaviour
     public PlayerState curPlayerState;
     public Dictionary<string, PlayerState> stateDic = new Dictionary<string, PlayerState>();
 
+    private void Awake()
+    {
+        stateDic.Add("AttackDelayState" , new PlayerAttackDelayState()  );
+        stateDic.Add("AttackState"      , new PlayerAttackState()       );
+        stateDic.Add("DeathState"       , new PlayerDeathState()        );
+        stateDic.Add("IdleState"        , new PlayerIdleState()         );
+        stateDic.Add("MobileAttack"     , new PlayerMobileAttackState() );
+        stateDic.Add("MoveState"        , new PlayerMoveState()         );
+        stateDic.Add("SkillState"       , new PlayerSkillState()        );
+
+        foreach(PlayerState Value in stateDic.Values)
+        {
+            Value.Init(this);
+        }
+    }
+
+    public IEnumerator StartState()
+    {
+        yield return new WaitForSeconds(0.1f);
+        stateDic.TryGetValue("IdleState", out curPlayerState);
+        curPlayerState.OnStateEnter();
+    }
+
     public void ChangeState(PlayerState state)
     {
         curPlayerState.OnStateExit();

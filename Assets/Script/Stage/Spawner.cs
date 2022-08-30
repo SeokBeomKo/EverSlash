@@ -19,9 +19,9 @@ public class Spawner : MonoBehaviour
     List<int> eliteSeconds = new List<int>();
     List<int> bossSeconds = new List<int>();
 
-    int commonIndex = 0;
-    int eliteIndex  = 0;
-    int bossIndex   = 0;
+    // int commonIndex = 0;
+    // int eliteIndex  = 0;
+    // int bossIndex   = 0;
 
     private void Start() {
         TimeManager.instance.eventPerSecond += SpawnRandomPattern;

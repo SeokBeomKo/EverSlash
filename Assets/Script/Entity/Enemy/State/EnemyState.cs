@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface EnemyState
 {
-    public Enemy enemy { get; set; }
-    public EnemyStateMachine stateMachine { get; set; }
+    public Enemy enemy {get; set;}
+    public EnemyStateMachine stateMachine {get; set;}
     public void Init(EnemyStateMachine stateMachine);
     public void Excute();
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    //TODO : 팩토리패턴
     PatternType patternType;
 
     [SerializeField] Transform      target;
@@ -14,9 +15,9 @@ public class Spawner : MonoBehaviour
     public int eliteInterval;
     public int bossInterval;
 
-    [SerializeField] List<int> commonSeconds = new List<int>();
-    [SerializeField] List<int> eliteSeconds = new List<int>();
-    [SerializeField] List<int> bossSeconds = new List<int>();
+    List<int> commonSeconds = new List<int>();
+    List<int> eliteSeconds = new List<int>();
+    List<int> bossSeconds = new List<int>();
 
     int commonIndex = 0;
     int eliteIndex  = 0;

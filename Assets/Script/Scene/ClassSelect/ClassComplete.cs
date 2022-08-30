@@ -14,6 +14,6 @@ public class ClassComplete : MonoBehaviour
         DataManager.instance.nowPlayer.playerClassName = className;
         DataManager.instance.SaveData();
 
-        SceneManager.LoadScene("03.GameScene");
+        SceneManager.LoadScene(3);
     }
 }

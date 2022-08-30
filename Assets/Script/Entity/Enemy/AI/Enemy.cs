@@ -21,10 +21,13 @@ abstract public class Enemy : Entity, IDropExp
     // 게임 시작시 설정
     private void Awake() 
     {
+        Debug.Log(GameManager.instance.player.transform);
+        target = GameManager.instance.player.transform;
+
         enemyAnim               = GetComponent<Animator>();
         nav                     = GetComponent<NavMeshAgent>();
-        material.meshRenderer   = GetComponentInChildren<SkinnedMeshRenderer>();
 
+        material.meshRenderer   = GetComponentInChildren<SkinnedMeshRenderer>();
         material.origin_1       = material.meshRenderer.material.GetColor("_BaseColor");
         material.origin_2       = material.meshRenderer.material.GetColor("_1st_ShadeColor");
         material.origin_3       = material.meshRenderer.material.GetColor("_2nd_ShadeColor");
@@ -39,14 +42,6 @@ abstract public class Enemy : Entity, IDropExp
 
         // 적 파편 설정
         enemyDbris.enemyObj = enemyObj;
-
-        // 추적 대상 설정
-        StartCoroutine(Set());
-    }
-    IEnumerator Set()
-    {
-        yield return new WaitForSeconds(0.1f);
-        target = GameManager.instance.player.transform;
     }
 
     // 오브젝트 풀링 시작시 설정
@@ -57,7 +52,7 @@ abstract public class Enemy : Entity, IDropExp
     }
 
     // 죽었을 시 오브젝트 풀링 리턴
-    private void OnDisable()
+    private void OnDisable() 
     {
         ObjectPooler.ReturnToPool(gameObject);
     }

@@ -7,7 +7,7 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField] GameObject[] classList;
     GameObject player;
 
-    private void Start() {
+    private void Awake() {
         DataManager.instance.LoadData();
         player = Instantiate(classList[DataManager.instance.nowPlayer.playerClass]);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 
-public class PlayerData
+public class UserData
 {
     public int playerClass;
     public string name;
@@ -17,7 +17,7 @@ public class PlayerData
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-    public PlayerData nowPlayer = new PlayerData();
+    public UserData nowPlayer = new UserData();
     public string path;
     public int nowSlot;
     private void Awake() {
@@ -38,7 +38,7 @@ public class DataManager : MonoBehaviour
     }
     public void LoadData(){
         string data = File.ReadAllText(path + nowSlot.ToString());
-        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
+        nowPlayer = JsonUtility.FromJson<UserData>(data);
     }
 
     public void DeleteData(){
@@ -47,7 +47,7 @@ public class DataManager : MonoBehaviour
 
     public void DataClear(){
         nowSlot = -1;
-        nowPlayer = new PlayerData();
+        nowPlayer = new UserData();
     }
 
 }

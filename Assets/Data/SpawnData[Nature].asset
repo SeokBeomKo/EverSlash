@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: SpawnData[Nature]
   m_EditorClassIdentifier: 
   commonDatas:
-  - Small_Golem
+  - Normal_Golem
   eliteDatas:
-  - Big_Golem
+  - Dash_Golem
+  - Bomb_Golem
   bossDatas:
-  - Big_Golem
+  - Smash_Golem

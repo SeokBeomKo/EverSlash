@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerData playerdata;
+    UserData playerdata;
     public float playerSpeed;
     private float moveSpeed;
     public int maxHealth;
     public int curHealth;
 
+    public int defence;
     public int minDamage;
     public int maxDamage;
     float  hAxis;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject attackCollision;
 
     private void Start() {
-        playerdata = DataManager.instance.nowPlayer;
+        //playerdata = DataManager.instance.nowPlayer;
     }
     private void Awake() {
         anim = GetComponentInChildren<PlayerAnimator>();
@@ -50,9 +51,10 @@ public class PlayerMovement : MonoBehaviour
         }
         moveSpeed = playerSpeed;
         dustObj = defaultdustObj;
+        defence = 1;
 
         // HUD UI
-        hpSlider = UIManager.instance.healthBar;
+        // hpSlider = UIManager.instance.healthBar;
     }
 
     private void Update() {
@@ -195,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnAttackCollision(){
-        attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage);
+        attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage,0);
         attackCollision.gameObject.SetActive(true);
     }
 
@@ -211,14 +213,9 @@ public class PlayerMovement : MonoBehaviour
         slashes[code].gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == "EnemyAttack"){
-            TakeDamage(other);
-            StartCoroutine(OnDamage(transform.position));
-        }
-    }
-
-    IEnumerator OnDamage(Vector3 reactVec){
+    public IEnumerator OnDamage(int _damage, int _ignore)
+    {
+        TakeDamage(_damage, _ignore);
         for (int i = 0; i < meshRenderer.Length; i++){
             meshRenderer[i].material.SetColor("_BaseColor",Color.red);
             meshRenderer[i].material.SetColor("_1st_ShadeColor",Color.red);
@@ -242,10 +239,17 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
     }
-    private void TakeDamage(Collider other){
-        int rand = other.GetComponent<AttackCollider>().TurnDamage();
-        curHealth -= rand; 
+    private void TakeDamage(int _damage, int _ignore){
+        int damage = _damage - (defence - _ignore);
 
-        hpSlider.SetHP(curHealth);
+        if (0 >= damage)
+        {
+            hpSlider.SetHP(curHealth);
+        }
+        else
+        {
+            curHealth -= damage;
+            hpSlider.SetHP(curHealth);
+        }
     }
 }

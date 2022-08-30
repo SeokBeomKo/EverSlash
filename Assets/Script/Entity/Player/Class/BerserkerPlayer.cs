@@ -12,7 +12,7 @@ public class BerserkerPlayer : Player
     }
     public override void Idle()
     {
-        if (0 != Input.GetAxisRaw("Horizontal") || 0 != Input.GetAxisRaw("Vertical"))
+        if (0 != Input.GetAxis("Horizontal") || 0 != Input.GetAxis("Vertical"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["MoveState"]);
         }
@@ -23,17 +23,17 @@ public class BerserkerPlayer : Player
     }
     public override void Move()
     {
-        if (0 == Input.GetAxisRaw("Horizontal") || 0 == Input.GetAxisRaw("Vertical"))
+        if (0 == Input.GetAxis("Horizontal") && 0 == Input.GetAxis("Vertical"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
         }
-        
+
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
 
         moveVec = new Vector3(hAxis,0,vAxis).normalized;
 
-        transform.LookAt(transform.position + moveVec);
+        playerModel.transform.LookAt(transform.position + moveVec);
 
         // 현재 위치 + 이동 방향 + 이동 속도 + 입력 시간
         playerRigid.MovePosition(transform.position + moveVec * moveSpeed * Time.deltaTime);

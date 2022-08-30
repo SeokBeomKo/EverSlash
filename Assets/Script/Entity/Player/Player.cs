@@ -4,6 +4,7 @@ using UnityEngine;
 
 abstract public class Player : Entity
 {
+    [SerializeField] public Transform           playerModel;         // 플레이어 모델
     [SerializeField] public Animator            playerAnim;          // 플레이어 애니메이터
     [SerializeField] public Rigidbody           playerRigid;         // 플레이어 리지드바디
 
@@ -15,10 +16,10 @@ abstract public class Player : Entity
 
     private void Awake() 
     {
+        playerModel = transform.GetChild(0);
         playerAnim = GetComponent<Animator>();
         playerRigid = GetComponent<Rigidbody>();
-        stateMachine = GetComponent<PlayerStateMachine>();  
-        stateMachine.player = this;  
+        stateMachine = GetComponent<PlayerStateMachine>();
 
         Init();
     }

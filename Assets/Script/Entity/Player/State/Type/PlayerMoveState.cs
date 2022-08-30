@@ -14,12 +14,15 @@ public class PlayerMoveState : PlayerState
     }
     public void Excute()
     {
+        player.Move();
     }
 
     public void OnStateEnter()
     {
+        player.playerAnim.SetBool("isMove",true);
     }
     public void OnStateExit()
     {
+        player.playerAnim.SetBool("isMove",false);
     }
 }

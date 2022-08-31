@@ -19,12 +19,10 @@ public class PlayerIdleState : PlayerState
 
     public void OnStateEnter()
     {
-        Debug.Log("아이들 스테이트 시작");
         player.playerAnim.SetBool("isIdle",true);
     }
     public void OnStateExit()
     {
-        Debug.Log("아이들 스테이트 종료");
         player.playerAnim.SetBool("isIdle",false);
     }
 }

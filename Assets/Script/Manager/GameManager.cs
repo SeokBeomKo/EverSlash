@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     public GameObject player;
+
+    public CinemachineVirtualCamera cam;
     public bool isAlive = true;
 
     private void Awake()

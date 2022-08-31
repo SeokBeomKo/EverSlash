@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BerserkerPlayer : Player
 {
+    public bool isCombo;
     public override void AttackDelay()
     {
         if (Input.GetButtonDown("Jump"))
@@ -11,10 +12,23 @@ public class BerserkerPlayer : Player
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
         }
 
-        if (playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+        if (Input.GetButton("Fire1"))
         {
-            Debug.Log("어택 준비중");
-            stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+            isCombo = true;
+        }
+
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay") &&
+            playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+        {
+            if (isCombo)
+            {
+                isCombo = false;
+                stateMachine.ChangeState(stateMachine.stateDic["AttackState"]);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+            }
         }
     }
     public override void Attack()
@@ -27,10 +41,18 @@ public class BerserkerPlayer : Player
 
     public override void Dodge()
     {
+        playerRigid.MovePosition(transform.position + playerModel.forward * (moveSpeed * 2f) * Time.deltaTime);
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("Dodge") &&
             playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+            if (0 == Input.GetAxis("Horizontal") && 0 == Input.GetAxis("Vertical"))
+            {
+                stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.stateDic["MoveState"]);
+            }
         }
     }
 
@@ -52,14 +74,15 @@ public class BerserkerPlayer : Player
     }
     public override void MobileAttack()
     {
-        
+        if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay"))
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["AttackDelayState"]);
+        }
     }
     public override void Move()
     {
-        Debug.Log("이동 중");
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("회피 누름");
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
         }
 

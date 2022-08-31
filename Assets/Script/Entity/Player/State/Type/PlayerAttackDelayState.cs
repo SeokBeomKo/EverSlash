@@ -14,6 +14,7 @@ public class PlayerAttackDelayState : PlayerState
     }
     public void Excute()
     {
+        player.AttackDelay();
     }
 
     public void OnStateEnter()

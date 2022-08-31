@@ -30,7 +30,7 @@ abstract public class Player : Entity
         //curHp = enemyData.enemyInfo.hp;
     }
 
-    private void FixedUpdate() 
+    private void Update() 
     {
         if (null != stateMachine.curPlayerState)
             stateMachine.curPlayerState.Excute();
@@ -42,6 +42,7 @@ abstract public class Player : Entity
     {
         // TODO : 플레이어 사망 시
     }                       
+    abstract public void Dodge();               // 회피 행동
     abstract public void Idle();                // 대기 행동
     abstract public void MobileAttack();        // 이동공격 행동
     abstract public void Move();                // 이동 행동

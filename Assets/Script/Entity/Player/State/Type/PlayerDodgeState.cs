@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerState
+public class PlayerDodgeState : PlayerState
 {
     public Player player { get; set; }
     public PlayerStateMachine stateMachine { get; set; }
@@ -14,15 +14,15 @@ public class PlayerAttackState : PlayerState
     }
     public void Excute()
     {
-        player.Attack();
+        player.Dodge();
     }
 
     public void OnStateEnter()
     {
-        player.playerAnim.SetTrigger("isAttack");
+        player.playerAnim.SetBool("isDodge",true);
     }
     public void OnStateExit()
     {
-        // player.playerAnim.ResetTrigger("isAttack");
+        player.playerAnim.SetBool("isDodge",false);
     }
 }

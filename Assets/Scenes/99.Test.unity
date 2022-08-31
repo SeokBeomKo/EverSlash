@@ -1178,7 +1178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHp: 0
-  moveSpeed: 5
+  moveSpeed: 10
   defence: 0
   playerModel: {fileID: 0}
   playerAnim: {fileID: 0}

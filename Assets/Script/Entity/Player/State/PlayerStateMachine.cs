@@ -15,7 +15,7 @@ public class PlayerStateMachine : MonoBehaviour
         stateDic.Add("DeathState"       , new PlayerDeathState()        );
         stateDic.Add("DodgeState"       , new PlayerDodgeState()        );
         stateDic.Add("IdleState"        , new PlayerIdleState()         );
-        stateDic.Add("MobileAttack"     , new PlayerMobileAttackState() );
+        stateDic.Add("MobileAttackState", new PlayerMobileAttackState() );
         stateDic.Add("MoveState"        , new PlayerMoveState()         );
         stateDic.Add("SkillState"       , new PlayerSkillState()        );
 

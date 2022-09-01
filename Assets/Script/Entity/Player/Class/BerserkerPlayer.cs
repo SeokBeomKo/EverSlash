@@ -5,8 +5,14 @@ using UnityEngine;
 public class BerserkerPlayer : Player
 {
     public bool isCombo;
+    public Vector3 attackVec;
     public override void AttackDelay()
     {
+        hAxis = Input.GetAxis("Horizontal");
+        vAxis = Input.GetAxis("Vertical");
+
+        attackVec = new Vector3(hAxis,0,vAxis).normalized;
+
         if (Input.GetButtonDown("Jump"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
@@ -23,10 +29,19 @@ public class BerserkerPlayer : Player
             if (isCombo)
             {
                 isCombo = false;
-                stateMachine.ChangeState(stateMachine.stateDic["AttackState"]);
+                playerModel.transform.LookAt(transform.position + attackVec);
+                if (0 == hAxis && 0 == vAxis)
+                {
+                    stateMachine.ChangeState(stateMachine.stateDic["AttackState"]);
+                }
+                else
+                {
+                    stateMachine.ChangeState(stateMachine.stateDic["MobileAttackState"]);
+                }
             }
             else
             {
+                attackVec = Vector3.zero;
                 stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
             }
         }
@@ -74,6 +89,7 @@ public class BerserkerPlayer : Player
     }
     public override void MobileAttack()
     {
+        //playerRigid.MovePosition(transform.position + playerModel.forward * (moveSpeed * 2f) * Time.deltaTime);
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["AttackDelayState"]);
@@ -92,6 +108,11 @@ public class BerserkerPlayer : Player
         if (0 == hAxis && 0 == vAxis)
         {
             stateMachine.ChangeState(stateMachine.stateDic["IdleState"]);
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            stateMachine.ChangeState(stateMachine.stateDic["MobileAttackState"]);
         }
 
         moveVec = new Vector3(hAxis,0,vAxis).normalized;

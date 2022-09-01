@@ -23,6 +23,6 @@ public class PlayerAttackState : PlayerState
     }
     public void OnStateExit()
     {
-        // player.playerAnim.ResetTrigger("isAttack");
+        player.playerAnim.ResetTrigger("isAttack");
     }
 }

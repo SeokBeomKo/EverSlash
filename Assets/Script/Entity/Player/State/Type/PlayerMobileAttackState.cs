@@ -14,14 +14,16 @@ public class PlayerMobileAttackState : PlayerState
     }
     public void Excute()
     {
+        player.MobileAttack();
     }
 
     public void OnStateEnter()
     {
-        player.playerAnim.SetBool("isMove",true);
+        player.playerRigid.MovePosition(player.transform.position + player.playerModel.forward * (player.moveSpeed * 2f));
         player.playerAnim.SetTrigger("isAttack");
     }
     public void OnStateExit()
     {
+        player.playerAnim.ResetTrigger("isAttack");
     }
 }

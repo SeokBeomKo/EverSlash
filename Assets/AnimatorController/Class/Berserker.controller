@@ -160,6 +160,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 4559252344419301460}
   - {fileID: 2591028044489310979}
+  - {fileID: 3210956700928571926}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -208,7 +209,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ComboDelay01_3
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1832825667287729822}
@@ -287,7 +288,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ComboDelay01_4
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2849609882649819101}
@@ -421,12 +422,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isMobileAttack
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -498,7 +493,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ComboDelay01_2
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6946966603173530364}
@@ -623,6 +618,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &3210956700928571926
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isAttack
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3828162474861579096}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.659091
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &3368598796570298509
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -665,31 +685,31 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3828162474861579096}
-    m_Position: {x: 110, y: 0, z: 0}
+    m_Position: {x: 430, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2257756516919889729}
-    m_Position: {x: 110, y: -140, z: 0}
+    m_Position: {x: 430, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3624980103019319719}
-    m_Position: {x: -150, y: -220, z: 0}
+    m_Position: {x: 170, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4270587456392091175}
-    m_Position: {x: -150, y: -70, z: 0}
+    m_Position: {x: 170, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6307448842299688065}
-    m_Position: {x: 110, y: -70, z: 0}
+    m_Position: {x: 430, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8451197751687764894}
     m_Position: {x: 540, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2123670349695033427}
-    m_Position: {x: 110, y: -220, z: 0}
+    m_Position: {x: 430, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4333963643934066200}
-    m_Position: {x: -150, y: -140, z: 0}
+    m_Position: {x: 170, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2617367867003982165}
-    m_Position: {x: -150, y: 0, z: 0}
+    m_Position: {x: 170, y: -20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -861,7 +881,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ComboDelay01_1
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2333338347131594893}

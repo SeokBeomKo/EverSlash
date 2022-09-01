@@ -29,7 +29,11 @@ abstract public class Player : Entity
         playerRigid = GetComponent<Rigidbody>();
         stateMachine = GetComponent<PlayerStateMachine>();
 
-        playerMaterial.materials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        Material[] materials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        playerMaterial.materials = new Material[materials.Length - 1];
+        playerMaterial.materials[0] = materials[0];
+        playerMaterial.materials[1] = materials[2];
+        playerMaterial.materials[2] = materials[3];
         playerMaterial.origin_1 = new Color[playerMaterial.materials.Length];
         playerMaterial.origin_2 = new Color[playerMaterial.materials.Length];
         playerMaterial.origin_3 = new Color[playerMaterial.materials.Length];
@@ -68,7 +72,8 @@ abstract public class Player : Entity
     abstract public void Move();                // 이동 행동
     abstract public void Skill();               // 스킬 행동
 
-    abstract public void OnAttack();
+    virtual public void OnAttack(){}
+    virtual public void OffAttack(){}
 
     public override IEnumerator OnHit(int _damage, int _ignore)
     {

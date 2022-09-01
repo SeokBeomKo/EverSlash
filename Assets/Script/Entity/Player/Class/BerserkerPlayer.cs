@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BerserkerPlayer : Player
 {
+    [SerializeField] public GameObject attColl;
     public bool isCombo;
     public Vector3 attackVec;
     public override void AttackDelay()
@@ -132,17 +133,10 @@ public class BerserkerPlayer : Player
 
     public override void OnAttack()
     {
-        RaycastHit rayHits;
-
-        if (Physics.SphereCast(transform.position,
-                            2f,
-                            playerModel.transform.forward,
-                            out rayHits,
-                            1f,
-                            LayerMask.GetMask("Enemy")))
-        {
-            // TODO : 데미지 스탯계산
-            StartCoroutine(rayHits.transform.GetComponent<Enemy>().OnHit(10,0));
-        }
+        attColl.gameObject.SetActive(true);
+    }
+    public override void OffAttack()
+    {
+        attColl.gameObject.SetActive(false);
     }
 }

@@ -24,6 +24,7 @@ public class PlayerMobileAttackState : PlayerState
     }
     public void OnStateExit()
     {
+        player.OffAttack();
         player.playerAnim.ResetTrigger("isAttack");
     }
 }

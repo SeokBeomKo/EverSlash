@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+public struct EnemyMaterial
+{
+    public SkinnedMeshRenderer meshRenderer;
+    public Color origin_1;
+    public Color origin_2;
+    public Color origin_3;
+}
 
 abstract public class Enemy : Entity, IDropExp
 {
@@ -13,6 +20,9 @@ abstract public class Enemy : Entity, IDropExp
     [SerializeField] public GameObject          enemyObj;           // 적 
     [SerializeField] public EnemyDebris         enemyDbris;         // 적 파편
 
+    
+    public EnemyMaterial material;     // 메테리얼
+
     public float attackDelay;
 
     public EnemyStateMachine stateMachine; 
@@ -21,7 +31,7 @@ abstract public class Enemy : Entity, IDropExp
     // 게임 시작시 설정
     private void Awake() 
     {
-        target = GameManager.instance.player.transform;
+        //target = GameManager.instance.player.transform;
 
         enemyAnim               = GetComponent<Animator>();
         nav                     = GetComponent<NavMeshAgent>();
@@ -82,7 +92,7 @@ abstract public class Enemy : Entity, IDropExp
         enemyDbris.gameObject.SetActive(true);
     }                        
 
-    public override IEnumerator OnDamage(int _damage, int _ignore)
+    public override IEnumerator OnHit(int _damage, int _ignore)
     {
         // 피격 데미지 처리
         int damage = _damage - (defence - _ignore);
@@ -118,7 +128,7 @@ abstract public class Enemy : Entity, IDropExp
         {
             var temp = other.GetComponent<AttackCollider>();
             // 피격 이펙트 처리
-            StartCoroutine(OnDamage(10,0));
+            StartCoroutine(OnHit(10,0));
             //StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
         }
     }

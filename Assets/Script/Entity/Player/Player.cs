@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct PlayerMaterial
+{
+    public Material[] materials;
+    public Color[] origin_1;
+    public Color[] origin_2;
+    public Color[] origin_3;
+}
 abstract public class Player : Entity
 {
     [SerializeField] public Transform           playerModel;         // 플레이어 모델
     [SerializeField] public Animator            playerAnim;          // 플레이어 애니메이터
     [SerializeField] public Rigidbody           playerRigid;         // 플레이어 리지드바디
+    [SerializeField] public PlayerMaterial      playerMaterial;      // 플레이어 메테리얼
 
     public float  hAxis;        // 좌우 이동
     public float  vAxis;        // 상하 이동
@@ -20,6 +28,18 @@ abstract public class Player : Entity
         playerAnim = GetComponent<Animator>();
         playerRigid = GetComponent<Rigidbody>();
         stateMachine = GetComponent<PlayerStateMachine>();
+
+        playerMaterial.materials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
+        playerMaterial.origin_1 = new Color[playerMaterial.materials.Length];
+        playerMaterial.origin_2 = new Color[playerMaterial.materials.Length];
+        playerMaterial.origin_3 = new Color[playerMaterial.materials.Length];
+        Debug.Log(playerMaterial.materials.Length);
+        for (int i = 0; i < playerMaterial.materials.Length; i++)
+        {
+            playerMaterial.origin_1[i] = playerMaterial.materials[i].GetColor("_BaseColor");
+            playerMaterial.origin_2[i] = playerMaterial.materials[i].GetColor("_1st_ShadeColor");
+            playerMaterial.origin_3[i] = playerMaterial.materials[i].GetColor("_2nd_ShadeColor");
+        }
 
         Init();
     }
@@ -48,7 +68,9 @@ abstract public class Player : Entity
     abstract public void Move();                // 이동 행동
     abstract public void Skill();               // 스킬 행동
 
-    public override IEnumerator OnDamage(int _damage, int _ignore)
+    abstract public void OnAttack();
+
+    public override IEnumerator OnHit(int _damage, int _ignore)
     {
         // 피격 데미지 처리
         int damage = _damage - (defence - _ignore);
@@ -57,17 +79,22 @@ abstract public class Player : Entity
         // 사망 처리
         if (0 >= curHp)
         {
-            stateMachine.ChangeState(stateMachine.stateDic["DeathState"]);
+            //stateMachine.ChangeState(stateMachine.stateDic["DeathState"]);
         }
 
-        material.meshRenderer.material.SetColor("_BaseColor",       Color.white);
-        material.meshRenderer.material.SetColor("_1st_ShadeColor",  Color.white);
-        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  Color.white);
+        for (int i = 0; i < playerMaterial.materials.Length; i++)
+        {
+            playerMaterial.materials[i].SetColor("_BaseColor",      Color.red);
+            playerMaterial.materials[i].SetColor("_1st_ShadeColor", Color.red);
+            playerMaterial.materials[i].SetColor("_2nd_ShadeColor", Color.red);
+        }
 
         yield return new WaitForSeconds(0.1f);
-
-        material.meshRenderer.material.SetColor("_BaseColor",       material.origin_1);
-        material.meshRenderer.material.SetColor("_1st_ShadeColor",  material.origin_2);
-        material.meshRenderer.material.SetColor("_2nd_ShadeColor",  material.origin_3);
+        for (int i = 0; i < playerMaterial.materials.Length; i++)
+        {
+            playerMaterial.materials[i].SetColor("_BaseColor",      playerMaterial.origin_1[i]);
+            playerMaterial.materials[i].SetColor("_1st_ShadeColor", playerMaterial.origin_2[i]);
+            playerMaterial.materials[i].SetColor("_2nd_ShadeColor", playerMaterial.origin_3[i]);
+        }
     }
 }

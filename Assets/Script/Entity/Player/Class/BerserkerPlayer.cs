@@ -15,6 +15,9 @@ public class BerserkerPlayer : Player
 
         if (Input.GetButtonDown("Jump"))
         {
+            if (attackVec != Vector3.zero)
+                playerModel.transform.forward = attackVec;
+            attackVec = Vector3.zero;
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
         }
 
@@ -89,7 +92,7 @@ public class BerserkerPlayer : Player
     }
     public override void MobileAttack()
     {
-        //playerRigid.MovePosition(transform.position + playerModel.forward * (moveSpeed * 2f) * Time.deltaTime);
+        playerRigid.MovePosition(transform.position + playerModel.forward * 0.1f);
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["AttackDelayState"]);
@@ -125,5 +128,21 @@ public class BerserkerPlayer : Player
     public override void Skill()
     {
         // TODO : 스킬 시스템
+    }
+
+    public override void OnAttack()
+    {
+        RaycastHit rayHits;
+
+        if (Physics.SphereCast(transform.position,
+                            2f,
+                            playerModel.transform.forward,
+                            out rayHits,
+                            1f,
+                            LayerMask.GetMask("Enemy")))
+        {
+            // TODO : 데미지 스탯계산
+            StartCoroutine(rayHits.transform.GetComponent<Enemy>().OnHit(10,0));
+        }
     }
 }

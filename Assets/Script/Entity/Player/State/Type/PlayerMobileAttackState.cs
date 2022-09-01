@@ -19,7 +19,7 @@ public class PlayerMobileAttackState : PlayerState
 
     public void OnStateEnter()
     {
-        player.playerRigid.MovePosition(player.transform.position + player.playerModel.forward * (player.moveSpeed * 2f));
+        player.OnAttack();
         player.playerAnim.SetTrigger("isAttack");
     }
     public void OnStateExit()

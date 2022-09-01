@@ -83,7 +83,7 @@ public class BombEnemy : Enemy
                             enemyData.bombInfo.skillRange * 0.5f,
                             LayerMask.GetMask("Player")))
         {
-            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.bombInfo.skillAttack,rayHits.transform.GetComponent<PlayerMovement>().defence));
+            StartCoroutine(rayHits.transform.GetComponent<Player>().OnHit(enemyData.bombInfo.skillAttack,rayHits.transform.GetComponent<PlayerMovement>().defence));
         }
         stateMachine.ChangeState(stateMachine.stateDic["DeathState"]);
     }

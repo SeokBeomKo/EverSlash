@@ -19,6 +19,7 @@ public class PlayerAttackState : PlayerState
 
     public void OnStateEnter()
     {
+        player.OnAttack();
         player.playerAnim.SetTrigger("isAttack");
     }
     public void OnStateExit()

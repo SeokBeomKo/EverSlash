@@ -2,13 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct EntityMaterial
-{
-    public SkinnedMeshRenderer meshRenderer;
-    public Color origin_1;
-    public Color origin_2;
-    public Color origin_3;
-}
+
 abstract public class Entity : MonoBehaviour, IDamageable
 {
     // 유동 데이터
@@ -19,6 +13,5 @@ abstract public class Entity : MonoBehaviour, IDamageable
     // public int ignore;               // 방어력 관통
     
     public int defence;                 // 방어력
-    public EntityMaterial material;     // 메테리얼
-    public abstract IEnumerator OnDamage(int _damage, int _ignore);
+    public abstract IEnumerator OnHit(int _damage, int _ignore);
 }

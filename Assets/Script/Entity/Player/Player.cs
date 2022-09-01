@@ -37,7 +37,7 @@ abstract public class Player : Entity
         playerMaterial.origin_1 = new Color[playerMaterial.materials.Length];
         playerMaterial.origin_2 = new Color[playerMaterial.materials.Length];
         playerMaterial.origin_3 = new Color[playerMaterial.materials.Length];
-        Debug.Log(playerMaterial.materials.Length);
+
         for (int i = 0; i < playerMaterial.materials.Length; i++)
         {
             playerMaterial.origin_1[i] = playerMaterial.materials[i].GetColor("_BaseColor");
@@ -58,6 +58,7 @@ abstract public class Player : Entity
     {
         if (null != stateMachine.curPlayerState)
             stateMachine.curPlayerState.Excute();
+        Debug.Log(stateMachine.curPlayerState);
     }
 
     abstract public void AttackDelay();         // 공격 준비 행동

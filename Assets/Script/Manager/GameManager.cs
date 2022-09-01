@@ -20,7 +20,14 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
-    private void Start() {
+    private void Start() 
+    {
         isAlive = true;
+    }
+
+    public void CamSetting()
+    {
+        cam.Follow = player.transform;
+        cam.LookAt = player.transform;
     }
 }

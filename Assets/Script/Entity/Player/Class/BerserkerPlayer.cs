@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BerserkerPlayer : Player
 {
-    [SerializeField] public GameObject attColl;
+    [SerializeField] public PlayerAttackColl attColl;
     public bool isCombo;
     public Vector3 attackVec;
     public override void AttackDelay()
@@ -28,7 +28,7 @@ public class BerserkerPlayer : Player
         }
 
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay") &&
-            playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+            playerAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
         {
             if (isCombo)
             {
@@ -133,6 +133,8 @@ public class BerserkerPlayer : Player
 
     public override void OnAttack()
     {
+        attColl.damage = 10;
+        attColl.ignore = 0;
         attColl.gameObject.SetActive(true);
     }
     public override void OffAttack()

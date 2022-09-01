@@ -31,7 +31,7 @@ abstract public class Enemy : Entity, IDropExp
     // 게임 시작시 설정
     private void Awake() 
     {
-        //target = GameManager.instance.player.transform;
+        target = GameManager.instance.player.transform;
 
         enemyAnim               = GetComponent<Animator>();
         nav                     = GetComponent<NavMeshAgent>();
@@ -126,9 +126,9 @@ abstract public class Enemy : Entity, IDropExp
     {
         if (other.CompareTag("PlayerAttack"))
         {
-            var temp = other.GetComponent<AttackCollider>();
+            var temp = other.gameObject.GetComponent<PlayerAttackColl>();
             // 피격 이펙트 처리
-            StartCoroutine(OnHit(10,0));
+            StartCoroutine(OnHit(temp.damage,temp.ignore));
             //StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
         }
     }

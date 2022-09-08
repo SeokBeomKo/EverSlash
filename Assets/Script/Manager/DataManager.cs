@@ -14,6 +14,7 @@ public class UserData
     public string ability2;
     public string ability3;
 }
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;

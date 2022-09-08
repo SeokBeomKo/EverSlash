@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObj: {fileID: 0}
-  m_force: 120
+  m_force: 1000
   reactVec: {x: 0, y: 0, z: 0}
 --- !u!1 &8239534908952762364
 GameObject:

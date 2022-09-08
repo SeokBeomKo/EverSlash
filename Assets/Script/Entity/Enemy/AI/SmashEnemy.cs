@@ -76,7 +76,7 @@ public class SmashEnemy : Enemy
                             enemyData.enemyInfo.range * 0.5f,
                             LayerMask.GetMask("Player")))
         {
-            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.enemyInfo.attack,enemyData.enemyInfo.ignore));
+            StartCoroutine(rayHits.transform.GetComponent<Player>().OnHit(enemyData.enemyInfo.attack,enemyData.enemyInfo.ignore));
         }
     }
     public void OnSkill()

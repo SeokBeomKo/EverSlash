@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private Color[] originColor3 = new Color[10];
     private Color color;
 
+    private Rigidbody rigid;
+
     [SerializeField]
     private GameObject attackCollision;
 
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         //playerdata = DataManager.instance.nowPlayer;
     }
     private void Awake() {
+        rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<PlayerAnimator>();
         meshRenderer = GetComponentsInChildren<SkinnedMeshRenderer>();
         for (int i = 0; i < meshRenderer.Length; i++){
@@ -184,7 +187,9 @@ public class PlayerMovement : MonoBehaviour
 
         anim.OnMovement(hAxis,vAxis);
         
+        //rigid.MovePosition(transform.position + moveVec * Time.deltaTime * 10f);
         transform.position += moveVec * moveSpeed * Time.deltaTime;
+        //transform.Translate(moveVec * Time.deltaTime * 10f);
     }
 
     private void Dodge(){
@@ -197,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnAttackCollision(){
-        attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage,0);
+        //attackCollision.GetComponent<AttackCollider>().SetDamage(minDamage,maxDamage,0);
         attackCollision.gameObject.SetActive(true);
     }
 

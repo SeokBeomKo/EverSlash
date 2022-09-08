@@ -5,9 +5,10 @@ using UnityEngine;
 public class DashEnemy : Enemy
 {
     public DashInfo dashInfo;
-    private Vector3 temp_Direction;    // 스킬 사용 방향
-    private Vector3 temp_Position;       // 스킬 사용 시작 시 포지션
+    private Vector3 temp_Direction;         // 스킬 사용 방향
+    private Vector3 temp_Position;          // 스킬 사용 시작 시 포지션
     private float temp_skillDelay;
+    
     public override void OnEnable() 
     {
         StartCoroutine(stateMachine.StartState());

@@ -11,6 +11,7 @@ public class PlayerSpawn : MonoBehaviour
         DataManager.instance.LoadData();
         player = Instantiate(classList[DataManager.instance.nowPlayer.playerClass]);
 
-        GameManager.instance.player = player.transform.GetChild(0).gameObject;
+        GameManager.instance.player = player;
+        GameManager.instance.CamSetting();
     }
 }

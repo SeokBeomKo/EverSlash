@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+public struct EnemyMaterial
+{
+    public SkinnedMeshRenderer meshRenderer;
+    public Color origin_1;
+    public Color origin_2;
+    public Color origin_3;
+}
 
 abstract public class Enemy : Entity, IDropExp
 {
-    [SerializeField] public EnemyData          enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
+    [SerializeField] public EnemyData           enemyData;          // 적 타입에 따른 데이터 스크립터블오브젝트
     [SerializeField] public Animator            enemyAnim;          // 적 애니메이터
     [SerializeField] public Transform           target;             // 추적 대상
     [SerializeField] public NavMeshAgent        nav;                // 추적 네비매쉬
 
     [SerializeField] public GameObject          enemyObj;           // 적 
     [SerializeField] public EnemyDebris         enemyDbris;         // 적 파편
+
+    
+    public EnemyMaterial material;     // 메테리얼
 
     public float attackDelay;
 
@@ -21,7 +31,6 @@ abstract public class Enemy : Entity, IDropExp
     // 게임 시작시 설정
     private void Awake() 
     {
-        Debug.Log(GameManager.instance.player.transform);
         target = GameManager.instance.player.transform;
 
         enemyAnim               = GetComponent<Animator>();
@@ -83,7 +92,7 @@ abstract public class Enemy : Entity, IDropExp
         enemyDbris.gameObject.SetActive(true);
     }                        
 
-    public override IEnumerator OnDamage(int _damage, int _ignore)
+    public override IEnumerator OnHit(int _damage, int _ignore)
     {
         // 피격 데미지 처리
         int damage = _damage - (defence - _ignore);
@@ -117,9 +126,9 @@ abstract public class Enemy : Entity, IDropExp
     {
         if (other.CompareTag("PlayerAttack"))
         {
-            var temp = other.GetComponent<AttackCollider>();
+            var temp = other.gameObject.GetComponent<PlayerAttackColl>();
             // 피격 이펙트 처리
-            StartCoroutine(OnDamage(10,0));
+            StartCoroutine(OnHit(temp.damage,temp.ignore));
             //StartCoroutine(OnDamage(temp.TurnDamage(),temp.TurnIgnore()));
         }
     }

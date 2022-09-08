@@ -49,10 +49,10 @@ public class NormalEnemy : Enemy
                             enemyData.enemyInfo.range,
                             transform.forward,
                             out rayHits,
-                            enemyData.enemyInfo.range * 0.5f,
+                            enemyData.enemyInfo.range,
                             LayerMask.GetMask("Player")))
         {
-            StartCoroutine(rayHits.transform.GetComponent<PlayerMovement>().OnDamage(enemyData.enemyInfo.attack,enemyData.enemyInfo.ignore));
+            StartCoroutine(rayHits.transform.GetComponent<Player>().OnHit(enemyData.enemyInfo.attack,enemyData.enemyInfo.ignore));
         }
     }
 }

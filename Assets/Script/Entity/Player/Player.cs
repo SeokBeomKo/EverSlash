@@ -58,7 +58,6 @@ abstract public class Player : Entity
     {
         if (null != stateMachine.curPlayerState)
             stateMachine.curPlayerState.Excute();
-        Debug.Log(stateMachine.curPlayerState);
     }
 
     abstract public void AttackDelay();         // 공격 준비 행동

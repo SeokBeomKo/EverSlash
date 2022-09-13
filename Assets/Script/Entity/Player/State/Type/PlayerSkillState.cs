@@ -14,12 +14,15 @@ public class PlayerSkillState : PlayerState
     }
     public void Excute()
     {
+        player.playerSkill.curSkill.Excute();
     }
 
     public void OnStateEnter()
     {
+        player.playerSkill.curSkill.EnterSkill();
     }
     public void OnStateExit()
     {
+        player.playerSkill.curSkill.ExitSkill();
     }
 }

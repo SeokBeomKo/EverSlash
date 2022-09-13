@@ -20,6 +20,7 @@ abstract public class Player : Entity
     public float  vAxis;        // 상하 이동
     public Vector3 moveVec;     // 이동 방향
 
+    public PlayerSkill playerSkill;
     public PlayerStateMachine stateMachine;
 
     private void Awake() 
@@ -28,6 +29,8 @@ abstract public class Player : Entity
         playerAnim = GetComponent<Animator>();
         playerRigid = GetComponent<Rigidbody>();
         stateMachine = GetComponent<PlayerStateMachine>();
+        playerSkill = gameObject.AddComponent<PlayerSkill>();
+        playerSkill.player = this;
 
         Material[] materials = GetComponentInChildren<SkinnedMeshRenderer>().materials;
         playerMaterial.materials = new Material[materials.Length - 1];
@@ -56,6 +59,7 @@ abstract public class Player : Entity
 
     private void Update() 
     {
+        playerSkill.SkillCoolTime();
         if (null != stateMachine.curPlayerState)
             stateMachine.curPlayerState.Excute();
     }
@@ -75,7 +79,7 @@ abstract public class Player : Entity
     virtual public void OnAttack(){}
     virtual public void OffAttack(){}
 
-    public override IEnumerator OnHit(int _damage, int _ignore)
+    override public IEnumerator OnHit(int _damage, int _ignore)
     {
         // 피격 데미지 처리
         int damage = _damage - (defence - _ignore);

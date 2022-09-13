@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveSkill : MonoBehaviour
+abstract public class ActiveSkill : Skill
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animation anim;
+    public float coolTime;      // 재사용 시간
+    public float _coolTime;     // 경과 시간
+    private void Awake() 
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    abstract public void Excute();
+    abstract public void EnterSkill();
+    abstract public void ExitSkill();
 }

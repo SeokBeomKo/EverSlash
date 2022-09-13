@@ -9,6 +9,8 @@ public class BerserkerPlayer : Player
     public Vector3 attackVec;
     public override void AttackDelay()
     {
+        playerSkill.UseSkill();
+
         hAxis = Input.GetAxis("Horizontal");
         vAxis = Input.GetAxis("Vertical");
 
@@ -52,12 +54,13 @@ public class BerserkerPlayer : Player
     }
     public override void Attack()
     {
+        playerSkill.UseSkill();
+
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["AttackDelayState"]);
         }
     }
-
     public override void Dodge()
     {
         playerRigid.MovePosition(transform.position + playerModel.forward * (moveSpeed * 2f) * Time.deltaTime);
@@ -74,9 +77,10 @@ public class BerserkerPlayer : Player
             }
         }
     }
-
     public override void Idle()
     {
+        playerSkill.UseSkill();
+
         if (Input.GetButtonDown("Jump"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
@@ -93,6 +97,8 @@ public class BerserkerPlayer : Player
     }
     public override void MobileAttack()
     {
+        playerSkill.UseSkill();
+
         playerRigid.MovePosition(transform.position + playerModel.forward * 0.1f);
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsTag("AttackDelay"))
         {
@@ -101,6 +107,8 @@ public class BerserkerPlayer : Player
     }
     public override void Move()
     {
+        playerSkill.UseSkill();
+
         if (Input.GetButtonDown("Jump"))
         {
             stateMachine.ChangeState(stateMachine.stateDic["DodgeState"]);
@@ -128,7 +136,7 @@ public class BerserkerPlayer : Player
     }
     public override void Skill()
     {
-        // TODO : 스킬 시스템
+        playerSkill.curSkill.Excute();
     }
 
     public override void OnAttack()

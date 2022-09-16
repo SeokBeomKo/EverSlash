@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Skill
 {
-    abstract public class PassiveSkill : Skill
+    abstract public class BerserkerActiveSkill : ActiveSkill
     {
-    
     }
 }
 

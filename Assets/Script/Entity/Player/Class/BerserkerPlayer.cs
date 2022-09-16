@@ -136,7 +136,7 @@ public class BerserkerPlayer : Player
     }
     public override void Skill()
     {
-        playerSkill.curSkill.Excute();
+        // 스킬 종료 체크 ?
     }
 
     public override void OnAttack()

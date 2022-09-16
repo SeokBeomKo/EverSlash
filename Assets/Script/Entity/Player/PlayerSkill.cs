@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Skill;
 
 public class PlayerSkill : MonoBehaviour
 {
@@ -20,58 +21,35 @@ public class PlayerSkill : MonoBehaviour
     {
         if (Input.GetButtonDown("Skill1"))
         {
-            if (null == activeSkills[0])
-            {
-                Debug.Log("비어있는 슬롯");
-                return;
-            }
-            if (UseSkillCheck(activeSkills[0]))
-            {
-                curSkill = activeSkills[0];
-                player.stateMachine.ChangeState(player.stateMachine.stateDic["SkillState"]);
-            }
+            ConditionCheck(0);
         }
         else if (Input.GetButtonDown("Skill2"))
         {
-            if (null == activeSkills[1])
-            {
-                Debug.Log("비어있는 슬롯");
-                return;
-            }
-            if (UseSkillCheck(activeSkills[1]))
-            {
-                curSkill = activeSkills[1];
-                player.stateMachine.ChangeState(player.stateMachine.stateDic["SkillState"]);
-            }
+            ConditionCheck(1);
         }
         else if (Input.GetButtonDown("Skill3"))
         {
-            if (null == activeSkills[2])
-            {
-                Debug.Log("비어있는 슬롯");
-                return;
-            }
-            if (UseSkillCheck(activeSkills[2]))
-            {
-                curSkill = activeSkills[2];
-                player.stateMachine.ChangeState(player.stateMachine.stateDic["SkillState"]);
-            }
+            ConditionCheck(2);
         }
         else if (Input.GetButtonDown("Skill4"))
         {
-            if (null == activeSkills[3])
-            {
-                Debug.Log("비어있는 슬롯");
-                return;
-            }
-            if (UseSkillCheck(activeSkills[3]))
-            {
-                curSkill = activeSkills[3];
-                player.stateMachine.ChangeState(player.stateMachine.stateDic["SkillState"]);
-            }
+            ConditionCheck(3);
         }
     }
-    public bool UseSkillCheck(ActiveSkill skill)
+    public void ConditionCheck(int number)
+    {
+        if (null == activeSkills[number])
+            {
+                Debug.Log("비어있는 슬롯 입니다.");
+                return;
+            }
+            if (SkillCoolTimeCheck(activeSkills[number]))
+            {
+                curSkill = activeSkills[number];
+                player.stateMachine.ChangeState(player.stateMachine.stateDic["SkillState"]);
+            }
+    }
+    public bool SkillCoolTimeCheck(ActiveSkill skill)
     {
         if (skill.coolTime > skill._coolTime)
         {

@@ -11,8 +11,12 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField]
     private int _time;
-    public int Time{
-        get{return _time;}
+    public int Time
+    {
+        get
+        {
+            return _time;
+        }
         set
         {
             _time = value;

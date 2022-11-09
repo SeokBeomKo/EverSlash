@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         isAlive = true;
     }
 
-    public void CamSetting()
+    public void Init()
     {
         cam.Follow = player.transform;
         cam.LookAt = player.transform;

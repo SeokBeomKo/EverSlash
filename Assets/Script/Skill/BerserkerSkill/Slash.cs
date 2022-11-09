@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Skill
 {
-    
     [CreateAssetMenu(fileName = "Slash", menuName = "Skills/Berserker/Slash", order = 0)]
     public class Slash : BerserkerActiveSkill
     {
@@ -15,7 +14,7 @@ namespace Skill
         }
         public override void Use()
         {
-            // 스킹 사용 시 작동
+            // 스킬 사용 시 작동
         }
     }
 }

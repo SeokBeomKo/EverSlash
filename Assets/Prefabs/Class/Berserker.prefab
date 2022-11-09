@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHp: 0
-  moveSpeed: 7.5
+  moveSpeed: 15
   defence: 0
   playerModel: {fileID: 9037126273641379386}
   playerAnim: {fileID: 0}
@@ -165,6 +165,7 @@ MonoBehaviour:
   hAxis: 0
   vAxis: 0
   moveVec: {x: 0, y: 0, z: 0}
+  playerSkill: {fileID: 0}
   stateMachine: {fileID: 29442561142419106}
   attColl: {fileID: 29442560875012203}
   isCombo: 0

@@ -16,9 +16,9 @@ abstract public class Player : Entity
     [SerializeField] public Rigidbody           playerRigid;         // 플레이어 리지드바디
     [SerializeField] public PlayerMaterial      playerMaterial;      // 플레이어 메테리얼
 
-    public float  hAxis;        // 좌우 이동
-    public float  vAxis;        // 상하 이동
-    public Vector3 moveVec;     // 이동 방향
+    public float  hAxis;        // 좌우 이동 입력 값
+    public float  vAxis;        // 상하 이동 입력 값
+    public Vector3 moveVec;     // 이동 방향 값
 
     public PlayerSkill playerSkill;
     public PlayerStateMachine stateMachine;
